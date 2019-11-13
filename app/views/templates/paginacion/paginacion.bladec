@@ -1,0 +1,17 @@
+<?php $anterior =@ $page -1; ?>
+<?php $siguiente =@ $page +1; ?>
+
+<?php if($page != 1 and $page != 0): ?>
+ <a href="?page=<?php echo static::e($anterior); ?>" class="links">Anterior</a>
+ <?php endif; ?>
+
+<?php $pagina =@ $page; ?>
+<?php for($pagina = 1; $pagina <= $total_pages; $pagina++): ?>
+ <a href="?page=<?php echo static::e($pagina); ?>" class="links"><?php echo static::e($pagina); ?></a>
+ <?php endfor; ?>
+
+<?php if($page < $total_pages or $page === $total_pages): ?>
+ <?php if($total_pages>1): ?>
+ <a href="?page=<?php echo static::e($siguiente); ?>" class="links">Siguiente</a>
+ <?php endif; ?>
+ <?php endif; ?>

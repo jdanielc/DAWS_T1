@@ -1,0 +1,62 @@
+table,th, tr, td{
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+h1{
+    alignment: center;
+    text-align: center;
+}
+td, th{
+    text-align: center;
+}
+.links{
+    alignment: center;
+    text-align: center;
+}
+li {
+    list-style: none;
+}
+.icono {
+    width: 30px;
+    alignment: center;
+}
+
+#menu_lateral{
+    float:left;
+    width:8em;
+    border-radius: 5px;
+    border:1px solid #aaa;
+    background: #ccffcc;
+    margin-right: 1em;
+}
+
+.linkb {
+    border: 0;
+    padding: 0;
+    display: inline;
+    background: none;
+    text-decoration: underline;
+    color: blue;
+}
+.linkb:hover {
+    cursor: pointer;
+}
+.lista_botones{
+    padding: 0;
+}
+
+.buttonB {
+    font: bold 11px Arial;
+    text-decoration: none;
+    background-color: #EEEEEE;
+    color: #333333;
+    padding: 2px 6px 2px 6px;
+    border-top: 1px solid #CCCCCC;
+    border-right: 1px solid #333333;
+    border-bottom: 1px solid #333333;
+    border-left: 1px solid #CCCCCC;
+}
+
+#t_buttons{
+    border: none;
+}

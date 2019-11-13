@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<?php echo $this->runChild("\..\header.header", array('titulo'=>"Ver Tareas")); ?>
+
+<body>
+<h2>Tareas Existentes</h2>
+<table>
+ <tr>
+ <th>Operario</th>
+ <th>Administrativo</th>
+ <th>Fecha de creacion</th>
+ <th>Fecha de realización</th>
+ <th>Direccion</th>
+ <th>Poblacion</th>
+ <th>Provincia</th>
+ <th>CP</th>
+ <th>Estado</th>
+ <th>Anotaciones Previas</th>
+ <th>Anotaciones Posteriores</th>
+ </tr>
+ <?php for($i= 0; $i < $limit; $i++): ?>
+ <?php if(($i + $starting_limit) < $total_result): ?>
+
+ <?php $tarea =@ $tareas[$i + $starting_limit]; ?>
+ <tr>
+ <td><p><?php echo static::e($tarea->getOperario()); ?></p></td>
+ <td><p><?php echo static::e($tarea->getAdministrativo()); ?></p></td>
+ <td><p><?php echo static::e($tarea->getFechaCreacion()); ?></p></td>
+ <td><p><?php echo static::e($tarea->getFechaRealizacion()); ?></p></td>
+ <td><p><?php echo static::e($tarea->getDireccion()); ?></p></td>
+ <td><p><?php echo static::e($tarea->getPoblacion()); ?></p></td>
+ <td><p><?php echo static::e($tarea->getProvincia()); ?></p></td>
+ <td><p><?php echo static::e($tarea->getCp()); ?></p></td>
+ <td><p><?php echo static::e($tarea->getEstado()); ?> </p></td>
+ <td><p><?php echo static::e($tarea->getAnotacionesAnt()); ?></p></td>
+ <td><p><?php echo static::e($tarea->getAnotacionesPost()); ?></p></td>
+ <td><ul class="lista_botones">
+ <li>
+ <form action="ctr_borrarTarea.php" method="post">
+ <input type="hidden" name="id" value="<?php echo static::e($tarea->getId()); ?>" />
+ <button class="linkb"><i class="fas fa-trash-alt"></i> Eliminar</button>
+ </form>
+ </li>
+ <li>
+ <form action="ctr_borrarTarea.php" method="post">
+ <input type="hidden" name="id" value="<?php echo static::e($tarea->getId()); ?>" />
+ <button class="linkb"><i class="fas fa-edit"></i>Modificar</button>
+ </form>
+ </li>
+ </ul></td>
+ </tr>
+ <?php endif; ?>
+ <?php endfor; ?>
+</table>
+<div>
+ <?php echo $this->runChild("\..\paginacion\paginacion", array('page'=>$page, 'total_pages' => $total_pages)); ?>
+</div>
+</body>
+</html>

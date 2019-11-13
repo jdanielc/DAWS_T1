@@ -1,0 +1,10 @@
+<html>
+<?php echo $this->runChild("\..\header.header", array('titulo'=>"Se ha borrado")); ?>
+<body onload="f()">
+<script>
+ function f(){
+ alert("<?php echo static::e($mensaje); ?>")
+ }
+</script>
+</body>
+</html>
