@@ -1,5 +1,5 @@
 <head>
-    <title>Título de la WEB</title>
+    <title>{{$titulo}}</title>
     <meta charset="UTF-8">
     <meta name="title" content="Tareas">
     <meta name="description" content="{{$titulo}}">

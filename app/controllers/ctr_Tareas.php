@@ -41,8 +41,28 @@ function GetTarea($id)
  */
 function SaveTarea($id, $datos_tarea)
 {
-    // No hacemos nada pues no podemos guardar nada en el código
-    // Simulamos como si estuviese implementado
+    try {
+
+        $db = Database::getInstance();
+        $stmt = ("UPDATE table_tarea SET tsk_estado=(?), 
+    tsk_anotaciones_ant = (?), tsk_anotaciones_post = (?) WHERE id=(?)");
+        $result = $db->prepare($stmt);
+        $result->bindParam(1, $datos_tarea[0], PDO::PARAM_STR);
+        $result->bindParam(2, $datos_tarea[1], PDO::PARAM_STR);
+        $result->bindParam(3, $datos_tarea[2], PDO::PARAM_STR);
+        $result->bindParam(4, $id, PDO::PARAM_INT);
+        $result->setFetchMode(PDO::FETCH_ASSOC);
+        $result->execute();
+        return true;
+    }catch (PDOException $exception){
+        throw new MyDatabaseException( $exception->getMessage( ) , (int)$exception->getCode( ) );
+    }
+
+}
+
+function UpdateTarea($id, $datos_tarea){
+    $db = Database::getInstance();
+
 }
 
 /**

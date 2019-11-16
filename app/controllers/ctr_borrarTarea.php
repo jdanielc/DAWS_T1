@@ -2,7 +2,6 @@
 require_once __DIR__."/../config.php";
 require_once DIR_PROYECTO."/models/Tarea.php";
 include_once DIR_PROYECTO."/controllers/ctr_Tareas.php";
-$id=null;
 
 if(isset($_POST["id"]) && !isset($_POST["delete"])){
     $id = $_POST["id"];

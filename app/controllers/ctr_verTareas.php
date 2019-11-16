@@ -6,6 +6,10 @@ include_once DIR_PROYECTO."/controllers/ctr_Tareas.php";
 
 if(isset($_GET["borrado"])){
     echo "<script type='text/javascript'>alert('Tarea Elminada');</script>";
+}else if (isset($_GET["action"])){
+    $action = $_GET["action"];
+
+    echo $blade->run("CRUD.formulario", ["action" => $action]);
 }
 
 //Tomo todas la tareas

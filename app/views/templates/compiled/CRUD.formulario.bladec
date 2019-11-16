@@ -1,0 +1,93 @@
+<html>
+
+<?php if($action == "crear"): ?>
+ <?php echo $this->runChild("\..\header.header", array('titulo'=>"Añadir Tarea")); ?>
+
+<?php elseif($action == "mod"): ?>
+ <?php echo $this->runChild("\..\header.header", array('titulo'=>"Modificar Tarea")); ?>
+
+<?php endif; ?>
+<body>
+<h2 class="title"><?php echo static::e($action); ?></h2>
+<form action="" method="post">
+<table id="formulario">
+ <tr>
+ <td>
+ <label for="txtOperario">Operario</label>
+ <input type="text" id="txtOperario">
+ </td>
+ <td>
+ <label for="txtAdmin">Administrador</label>
+ <input type="text" id="txtAdmin">
+ </td>
+ </tr>
+ <tr>
+ <td>
+ <label for="fecha_creacion">Fecha de Creación</label>
+ <input type="text" id="fecha_creacion">
+ </td>
+ <?php if($action == "mod"): ?>
+ <td>
+ <label for="fecha_realizacion">Fecha Realizacion</label>
+ <input type="text" id="fecha_realizacion">
+ </td>
+ <?php endif; ?>
+ </tr>
+ <tr>
+ <td>
+ <label for="txtDireccion">Dirección</label>
+ <input type="text" id="txtDireccion">
+ </td>
+ <td>
+ <label for="txtPoblacion">Población</label>
+ <input type="text" id="txtPoblacion">
+ </td>
+ </tr>
+ <tr>
+ <td>
+ <label for="provincia">Provincia</label>
+ <select name="provincia" id="provincia">
+ <?php $__currentLoopData = $provincias; $this->addLoop($__currentLoopData); foreach($__currentLoopData as $provincia): $this->incrementLoopIndices(); $loop = $this->getFirstLoop(); ?>
+ <option value="<?php echo static::e($provincia); ?>"><?php echo static::e($provincia); ?></option>
+ <?php endforeach; $this->popLoop(); $loop = $this->getFirstLoop(); ?>
+ </select></td>
+ <td>
+ <label for="txtCP">Código Postal</label>
+ <input type="text" id="txtCP">
+ </td>
+ </tr>
+ <?php if($action == "mod"): ?>
+ <tr>
+ <td><label for="estado">Estado</label></td>
+ <td><input type="radio" name="estado" value="R">Realizada</td>
+ <td><input type="radio" name="estado" value="P">Pendiente</td>
+ <td><input type="radio" name="estado" value="C">Cancelada</td>
+ </tr>
+ <?php endif; ?>
+ <tr>
+ <td>
+ <label for="anotaciones_ant">Anotaciones Anteriores</label>
+ </td>
+
+ <?php if($action == "mod"): ?>
+ <td>
+ <label for="anotaciones_pos">Anotaciones Posteriores</label>
+ </td>
+ <?php endif; ?>
+
+ </tr>
+ <tr>
+ <td>
+ <textarea name="anotaciones_ant" id="anotaciones_ant" cols="30" rows="10"></textarea>
+ </td>
+ <?php if($action == "mod"): ?>
+
+ <td>
+ <textarea name="anotaciones_pos" id="anotaciones_pos" cols="30" rows="10"></textarea>
+ </td>
+ <?php endif; ?>
+ </tr>
+</table>
+</form>
+</body>
+</html>

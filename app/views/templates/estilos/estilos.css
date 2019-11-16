@@ -60,3 +60,14 @@ li {
 #t_buttons{
     border: none;
 }
+#t_complete{
+    alignment: center;
+    margin-top: 20px;
+}
+.title{
+    text-transform: uppercase;
+}
+
+#formulario td{
+    padding: 15px;
+}
