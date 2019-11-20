@@ -6,7 +6,7 @@
 <body>
 <h2>Tareas Existentes</h2>
 <form action="ctr_formularioTareas.php" method="post">
- <input type="hidden" name="action" value="crear"/>
+ <input type="hidden" name="action" value="add"/>
  <button class="linkb"><i class="fas fa-plus"></i>Añadir Tarea</button>
 </form>
 <table>
@@ -47,7 +47,7 @@
  </form>
  </li>
  <li>
- <form action="ctr.php" method="post">
+ <form action="ctr_formularioTareas.php" method="post">
  <input type="hidden" name="id" value="<?php echo static::e($tarea->getId()); ?>" />
  <input type="hidden" name="action" value="mod"/>
  <button class="linkb"><i class="fas fa-edit"></i>Modificar</button>

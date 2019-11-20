@@ -71,3 +71,7 @@ li {
 #formulario td{
     padding: 15px;
 }
+
+.error{
+    color: red;
+}

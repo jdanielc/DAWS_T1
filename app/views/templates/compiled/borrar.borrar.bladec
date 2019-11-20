@@ -30,7 +30,7 @@
  <td><p><?php echo static::e($tarea->getAnotacionesPost()); ?></p></td>
  </tr>
 </table>
-<table>
+<table id="t_buttons">
  <tr>
  <td>
  <form action="" method="post">

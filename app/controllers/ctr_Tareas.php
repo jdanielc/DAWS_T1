@@ -61,19 +61,34 @@ function SaveTarea($id, $datos_tarea)
 }
 
 function UpdateTarea($id, $datos_tarea){
-    $db = Database::getInstance();
 
 }
 
 /**
  * Guarda una nueva la tarea
  */
-function NuevaTarea($datos_tarea)
+function NuevaTarea($datos)
 {
-    // No hacemos nada pues no podemos guardar nada en el código
-    // Simulamos como si estuviese implementado
-
-    // return id;
+    try{
+        $db = Database::getInstance();
+        $stmt = ("INSERT INTO table_tarea (tsk_operario, tsk_administrativo, tsk_fecha_creacion, tsk_direccion, tsk_poblacion, tsk_provincia, tsk_cp,tsk_estado, tsk_anotaciones_ant) VALUES 
+(:operario, :admin, :fecha, :direccion,:poblacion, :provincia, :cp, :estado, :anotacion )");
+        $result = $db->prepare($stmt);
+        $result->bindParam(":operario", $datos["txtOperario"], PDO::PARAM_INT);
+        $result->bindParam(":admin", $datos["txtAdmin"]);
+        $result->bindParam(":fecha", $datos["fecha_creacion"]);
+        $result->bindParam(":direccion", $datos["txtDireccion"]);
+        $result->bindParam(":direccion", $datos["txtDireccion"]);
+        $result->bindParam(":poblacion", $datos["txtPoblacion"]);
+        $result->bindParam(":provincia", $datos["provincia"]);
+        $result->bindParam(":cp", $datos["txtCP"]);
+        $result->bindParam(":estado", $datos["estado"]);
+        $result->bindParam(":anotacion", $datos["anotaciones_ant"]);
+        $result->execute();
+        return true;
+    }catch (PDOException $exception){
+        throw new MyDatabaseException( $exception->getMessage( ) , (int)$exception->getCode( ) );
+    }
 }
 
 function BorrarTareas($id){
@@ -89,4 +104,22 @@ function BorrarTareas($id){
         throw new MyDatabaseException( $Exception->getMessage( ) , (int)$Exception->getCode( ) );
     }
 
+}
+
+
+function ValorPost($nombreCampo, $valorPorDefecto='')
+{
+    if (isset($_POST[$nombreCampo]))
+        return $_POST[$nombreCampo];
+    else
+        return $valorPorDefecto;
+}
+
+function VerErrores($campo)
+{
+    global $errores;
+    if (isset($errores[$campo]))
+    {
+        echo "<p style='color: red'>".$errores[$campo]."</p>";
+    }
 }

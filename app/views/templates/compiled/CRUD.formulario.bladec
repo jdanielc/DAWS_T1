@@ -1,6 +1,6 @@
 <html>
 
-<?php if($action == "crear"): ?>
+<?php if($action == "add"): ?>
  <?php echo $this->runChild("\..\header.header", array('titulo'=>"Añadir Tarea")); ?>
 
 <?php elseif($action == "mod"): ?>
@@ -9,38 +9,62 @@
 <?php endif; ?>
 <body>
 <h2 class="title"><?php echo static::e($action); ?></h2>
-<form action="" method="post">
+<form     <?php if($action == "mod"): ?>
+ action="ctr_modTarea.php"
+ <?php elseif($action == "add"): ?>
+ action="ctr_addTareas.php"
+ <?php endif; ?>
+ method="post">
+
 <table id="formulario">
  <tr>
  <td>
  <label for="txtOperario">Operario</label>
- <input type="text" id="txtOperario">
+ <input type="text" id="txtOperario" name="txtOperario" value="<?php echo static::e($datos["txtOperario"]); ?>">
+ <?php if(isset($errores["txtOperario"])): ?>
+ <span class="error"><?php echo static::e($errores["txtOperario"]); ?></span>
+ <?php endif; ?>
  </td>
  <td>
  <label for="txtAdmin">Administrador</label>
- <input type="text" id="txtAdmin">
+ <input type="text" id="txtAdmin" name="txtAdmin" value="<?php echo static::e($datos["txtAdmin"]); ?>">
+ <?php if(isset($errores["txtAdmin"])): ?>
+ <span class="error"><?php echo static::e($errores["txtAdmin"]); ?></span>
+ <?php endif; ?>
  </td>
  </tr>
  <tr>
  <td>
  <label for="fecha_creacion">Fecha de Creación</label>
- <input type="text" id="fecha_creacion">
+ <input type="text" id="fecha_creacion" name="fecha_creacion" placeholder="dd-mm-yyyy"  value="<?php echo static::e($datos["fecha_creacion"]); ?>">
+ <?php if(isset($errores["fecha_creacion"])): ?>
+ <span class="error"><?php echo static::e($errores["fecha_creacion"]); ?></span>
+ <?php endif; ?>
  </td>
  <?php if($action == "mod"): ?>
  <td>
  <label for="fecha_realizacion">Fecha Realizacion</label>
- <input type="text" id="fecha_realizacion">
+ <input type="text" id="fecha_realizacion" name="fecha_realizacion" placeholder="yyyy-mm-dd"  value="<?php echo static::e($datos["fecha_realizacion"]); ?>">
+ <?php if(isset($errores["fecha_realizacion"])): ?>
+ <span class="error"><?php echo static::e($errores["fecha_realizacion"]); ?></span>
+ <?php endif; ?>
  </td>
  <?php endif; ?>
  </tr>
  <tr>
  <td>
  <label for="txtDireccion">Dirección</label>
- <input type="text" id="txtDireccion">
+ <input type="text" id="txtDireccion" name="txtDireccion"  value="<?php echo static::e($datos["txtDireccion"]); ?>">
+ <?php if(isset($errores["txtDireccion"])): ?>
+ <span class="error"><?php echo static::e($errores["txtDireccion"]); ?></span>
+ <?php endif; ?>
  </td>
  <td>
  <label for="txtPoblacion">Población</label>
- <input type="text" id="txtPoblacion">
+ <input type="text" id="txtPoblacion" name="txtPoblacion" value="<?php echo static::e($datos["txtPoblacion"]); ?>">
+ <?php if(isset($errores["txtPoblacion"])): ?>
+ <span class="error"><?php echo static::e($errores["txtPoblacion"]); ?></span>
+ <?php endif; ?>
  </td>
  </tr>
  <tr>
@@ -53,16 +77,21 @@
  </select></td>
  <td>
  <label for="txtCP">Código Postal</label>
- <input type="text" id="txtCP">
+ <input type="text" id="txtCP" name="txtCP"  value="<?php echo static::e($datos["txtCP"]); ?>">
+ <?php if(isset($errores["txtCP"])): ?>
+ <span class="error"><?php echo static::e($errores["txtCP"]); ?></span>
+ <?php endif; ?>
  </td>
  </tr>
  <?php if($action == "mod"): ?>
  <tr>
  <td><label for="estado">Estado</label></td>
- <td><input type="radio" name="estado" value="R">Realizada</td>
- <td><input type="radio" name="estado" value="P">Pendiente</td>
- <td><input type="radio" name="estado" value="C">Cancelada</td>
+ <td><input type="radio" name="estado" value="R">Realizada
+ <input type="radio" name="estado" value="P">Pendiente
+ <input type="radio" name="estado" value="C">Cancelada</td>
  </tr>
+ <?php else: ?>
+ <input type="hidden" name="estado" value="P">
  <?php endif; ?>
  <tr>
  <td>
@@ -78,16 +107,19 @@
  </tr>
  <tr>
  <td>
- <textarea name="anotaciones_ant" id="anotaciones_ant" cols="30" rows="10"></textarea>
+ <textarea name="anotaciones_ant" id="anotaciones_ant" cols="50" rows="10" value="<?php echo static::e($datos["anotaciones_ant"]); ?>"></textarea>
  </td>
  <?php if($action == "mod"): ?>
 
  <td>
- <textarea name="anotaciones_pos" id="anotaciones_pos" cols="30" rows="10"></textarea>
+ <textarea name="anotaciones_pos" id="anotaciones_pos" cols="50" rows="10" value="<?php echo static::e($datos["anotaciones_pos"]); ?>"></textarea>
  </td>
  <?php endif; ?>
  </tr>
 </table>
+ <input type="hidden" name="action" value="<?php echo static::e($action); ?>">
+ <input type="submit" value="Aceptar">
+
 </form>
 </body>
 </html>

@@ -6,14 +6,26 @@ include_once DIR_PROYECTO."/controllers/ctr_Tareas.php";
 if(isset($_POST["action"])){
     $action = $_POST["action"];
 
-    $provincias = ['Alava','Albacete','Alicante','Almería','Asturias','Avila','Badajoz','Barcelona','Burgos','Cáceres',
-        'Cádiz','Cantabria','Castellón','Ciudad Real','Córdoba','La Coruña','Cuenca','Gerona','Granada','Guadalajara',
-        'Guipúzcoa','Huelva','Huesca','Islas Baleares','Jaén','León','Lérida','Lugo','Madrid','Málaga','Murcia','Navarra',
-        'Orense','Palencia','Las Palmas','Pontevedra','La Rioja','Salamanca','Segovia','Sevilla','Soria','Tarragona',
-        'Santa Cruz de Tenerife','Teruel','Toledo','Valencia','Valladolid','Vizcaya','Zamora','Zaragoza'];
 
-    if($action == "crear"){
-        echo $blade ->run("CRUD.formulario", ["action" => $action, "provincias"=>$provincias]);
+    $errores = array();
+    $datos = [
+        "txtOperario"=>"",
+        "txtAdmin"=>"",
+        "fecha_creacion"=>"",
+        "fecha_realizacion"=>"",
+        "txtDireccion"=>"",
+        "txtPoblacion"=>"",
+        "txtCP"=>"",
+        "anotaciones_ant"=>"",
+        "anotaciones_pos"=>""
+    ];
+
+    if($action == "add"){
+        echo $blade ->run("CRUD.formulario", ["action" => $action, "provincias"=>$provincias, "errores"=> $errores, "datos"=>$datos]);
+    }else if($action == "mod"){
+        $id = $_POST["id"];
+
+        echo $blade ->run("CRUD.formulario", ["action" => $action, "provincias"=>$provincias, "errores"=> $errores, "id"=>$id, "datos"=>$datos]);
     }
 
 }else{
