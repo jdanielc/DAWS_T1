@@ -4,12 +4,32 @@
 @include("\..\header.header", array('titulo'=>"Ver Tareas"))
 
 <body>
-<h2>Tareas Existentes</h2>
-<form action="ctr_formularioTareas.php" method="post">
-    <input type="hidden" name="action" value="add"/>
-    <button class="linkb"><i class="fas fa-plus"></i>Añadir Tarea</button>
-</form>
-<table>
+<div id="titulo">
+    <h2>Tareas Existentes</h2>
+</div>
+
+<div id="encabezado">
+    <form action="ctr_formularioTareas.php" method="post" id="form_add">
+        <input type="hidden" name="action" value="add"/>
+        <button class="btn btn-link"><i class="fas fa-plus"></i>Añadir Tarea</button>
+    </form>
+    <form action="ctr_busqueda.php" method="post" id="form_seach">
+        <div>
+            <input type="text" placeholder="Buscar..." id="buscar" name="buscar" @if(isset($busqueda)) value="{{$busqueda}}" @endif>
+            <input type="submit" value="Buscar" class="btn btn-light">
+        </div>
+    </form>
+    @if(isset($busqueda))
+    <form action="ctr_verTareas.php">
+        <input type="submit" value="Volver">
+    </form>
+    @endif
+</div>
+
+<div class="row">
+    @include("\..\menu.menu")
+    <div class="col-sm-10 table-wrap">
+    <table class="table table-bordered table-responsive">
     <tr>
         <th>Operario</th>
         <th>Administrativo</th>
@@ -22,6 +42,8 @@
         <th>Estado</th>
         <th>Anotaciones Previas</th>
         <th>Anotaciones Posteriores</th>
+        <th>Acciones</th>
+
     </tr>
     @for($i= 0; $i < $limit; $i++)
         @if(($i + $starting_limit) < $total_result)
@@ -64,8 +86,10 @@
         @endif
     @endfor
 </table>
-<div>
-    @include("\..\paginacion\paginacion", array('page'=>$page, 'total_pages' => $total_pages))
+    </div>
 </div>
+<footer>
+    @include("\..\paginacion\paginacion", array('page'=>$page, 'total_pages' => $total_pages))
+</footer>
 </body>
 </html>

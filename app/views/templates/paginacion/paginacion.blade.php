@@ -7,7 +7,7 @@
 
 @set($pagina = $page)
 @for($pagina = 1; $pagina <= $total_pages; $pagina++)
-    <a href="?page={{$pagina}}" class="links">{{$pagina}}</a>
+        <a href="?page={{$pagina}}" class="links">{{$pagina}}</a>
     @endfor
 
 @if($page < $total_pages or $page === $total_pages)

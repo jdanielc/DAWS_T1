@@ -3,6 +3,7 @@ require_once __DIR__."/../config.php";
 require_once DIR_PROYECTO."/models/Tarea.php";
 require_once DIR_PROYECTO."/models/Empleado.php";
 include_once DIR_PROYECTO."/controllers/ctr_Tareas.php";
+include_once DIR_PROYECTO."/controllers/ctr_compDatos.php";
 
 if(isset($_POST["id"]) && !isset($_POST["estado"])){
 
@@ -21,13 +22,14 @@ if(isset($_POST["id"]) && !isset($_POST["estado"])){
         $an_ant = "";
         $an_post = "";
 
-        if(isset($_POST["texto_previo"])){
-            $an_ant = $_POST["texto_previo"];
+
+        if(IsPost("texto_previo")){
+            $an_ant = ValorPost("texto_previo");
         }else{
             $an_ant = $tarea->getAnotacionesAnt();
         }
-        if(isset($_POST["texto_posterior"])){
-            $an_post = $_POST["texto_posterior"];
+        if(IsPost("texto_posterior")){
+            $an_post = ValorPost("texto_posterior");
         }else{
             $an_post = $tarea->getAnotacionesPost();
         }
@@ -36,7 +38,7 @@ if(isset($_POST["id"]) && !isset($_POST["estado"])){
         $result = SaveTarea($id, $datos);
 
         if($result){
-            header("Location: ctr_verTareas.php");
+            header("Location: ctr_verTareas.php?page=".$page);
         }
 
 }

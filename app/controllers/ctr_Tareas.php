@@ -12,7 +12,7 @@ function GetTareas()
         $result->execute();
         return $result;
     }catch (PDOException $exception){
-        throw new MyDatabaseException( $exception->getMessage( ) , (int)$exception->getCode( ) );
+        throw new Exception( $exception->getMessage( ) , (int)$exception->getCode( ) );
 
     }
 }
@@ -55,13 +55,43 @@ function SaveTarea($id, $datos_tarea)
         $result->execute();
         return true;
     }catch (PDOException $exception){
-        throw new MyDatabaseException( $exception->getMessage( ) , (int)$exception->getCode( ) );
+        throw new Exception( $exception->getMessage( ) , (int)$exception->getCode( ) );
     }
 
 }
 
-function UpdateTarea($id, $datos_tarea){
+function UpdateTarea($id, $datos){
+    try {
 
+        $db = Database::getInstance();
+        $stmt = ("UPDATE table_tarea SET tsk_operario = :operario, tsk_administrativo = :admin,  tsk_fecha_creacion= :fecha_creacion,
+        tsk_fecha_realizacion= :fecha_pos,  tsk_direccion = :direccion,  tsk_poblacion = :poblacion ,  tsk_provincia = :provincia,
+    tsk_cp= :cp ,  tsk_estado = :estado,  tsk_anotaciones_ant = :anotaciones_ant ,  tsk_anotaciones_post = :anotaciones_pos 
+      WHERE id=:id");
+        $result = $db->prepare($stmt);
+        $result->bindParam(":operario", $datos["txtOperario"], PDO::PARAM_INT);
+        $result->bindParam(":admin", $datos["txtAdmin"], PDO::PARAM_INT);
+        $result->bindParam(":fecha_creacion", $datos["fecha_creacion"]);
+        $result->bindParam(":fecha_pos", $datos["fecha_realizacion"]);
+        $result->bindParam(":direccion", $datos["txtDireccion"]);
+        $result->bindParam(":poblacion", $datos["txtPoblacion"]);
+        $result->bindParam(":provincia", $datos["provincia"]);
+        $result->bindParam(":cp", $datos["txtCP"]);
+        $result->bindParam(":estado", $datos["estado"]);
+        $result->bindParam(":anotaciones_ant", $datos["anotaciones_ant"]);
+        $result->bindParam(":anotaciones_pos", $datos["anotaciones_pos"]);
+        $result->bindParam(":id", $id);
+        $result->execute();
+
+        if($result){
+            return true;
+        }else{
+            return false;
+        }
+
+    }catch (PDOException $exception){
+        throw new Exception( $exception->getMessage( ) , (int)$exception->getCode( ) );
+    }
 }
 
 /**
@@ -87,7 +117,7 @@ function NuevaTarea($datos)
         $result->execute();
         return true;
     }catch (PDOException $exception){
-        throw new MyDatabaseException( $exception->getMessage( ) , (int)$exception->getCode( ) );
+        throw new Exception( $exception->getMessage( ) , (int)$exception->getCode( ) );
     }
 }
 
@@ -101,25 +131,31 @@ function BorrarTareas($id){
         $result->execute();
         return true;
     }catch (PDOException $Exception){
-        throw new MyDatabaseException( $Exception->getMessage( ) , (int)$Exception->getCode( ) );
+        throw new Exception( $Exception->getMessage( ) , (int)$Exception->getCode( ) );
     }
 
 }
 
+function BuscarTareas($dato){
 
-function ValorPost($nombreCampo, $valorPorDefecto='')
-{
-    if (isset($_POST[$nombreCampo]))
-        return $_POST[$nombreCampo];
-    else
-        return $valorPorDefecto;
-}
+    try{
 
-function VerErrores($campo)
-{
-    global $errores;
-    if (isset($errores[$campo]))
-    {
-        echo "<p style='color: red'>".$errores[$campo]."</p>";
+        $db = Database::getInstance();
+        /*
+        $stmt = ("SELECT * FROM table_tarea WHERE CONCAT(`tsk_operario` ,`tsk_administrativo` ,`tsk_fecha_creacion` ,`tsk_fecha_realizacion` 
+        ,`tsk_direccion` ,`tsk_poblacion` ,`tsk_provincia` ,`tsk_cp` ,`tsk_estado` ,`tsk_anotaciones_ant` ,`tsk_anotaciones_post` ) like '%(?)%'");
+        */
+        //TODO: ARREGLAR SQL
+        $stmt = ("SELECT * FROM `table_tarea` WHERE (`tsk_operario` LIKE :dato) OR (`tsk_administrativo` LIKE :dato) OR (`tsk_fecha_creacion`LIKE :dato) OR (`tsk_fecha_realizacion` LIKE :dato) OR (`tsk_direccion` LIKE :dato) OR (`tsk_poblacion` LIKE :dato) OR (`tsk_provincia` LIKE :dato) OR (`tsk_cp` LIKE :dato) OR (`tsk_estado` LIKE :dato) OR (`tsk_anotaciones_ant` LIKE :dato) OR (`tsk_anotaciones_post` LIKE :dato)");
+        $result = $db->prepare($stmt);
+        $dato = "%".$dato."%";
+        $result->bindParam(":dato", $dato);
+        $result->setFetchMode(PDO::FETCH_ASSOC);
+        $result->execute();
+        return $result;
+    }catch (PDOException $exception){
+        throw new Exception( $exception->getMessage( ) , (int)$exception->getCode( ) );
+
     }
 }
+

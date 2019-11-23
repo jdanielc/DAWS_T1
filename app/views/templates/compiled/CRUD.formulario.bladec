@@ -1,5 +1,15 @@
-<html>
+<?php
+function VerErrores($campo)
+{
+ global $errores;
+ if (isset($errores[$campo]))
+ {
+ echo "<p style='color: red'>".$errores[$campo]."</p>";
+ }
+}
+?>
 
+<html>
 <?php if($action == "add"): ?>
  <?php echo $this->runChild("\..\header.header", array('titulo'=>"Añadir Tarea")); ?>
 
@@ -8,7 +18,15 @@
 
 <?php endif; ?>
 <body>
-<h2 class="title"><?php echo static::e($action); ?></h2>
+<h2 class="title">
+ <?php if($action === "mod"): ?>
+ Modificar Tarea
+ <?php elseif($action === "add"): ?>
+ Añadir Tarea
+ <?php else: ?>
+ Formulario
+ <?php endif; ?>
+</h2>
 <form     <?php if($action == "mod"): ?>
  action="ctr_modTarea.php"
  <?php elseif($action == "add"): ?>
@@ -21,33 +39,33 @@
  <td>
  <label for="txtOperario">Operario</label>
  <input type="text" id="txtOperario" name="txtOperario" value="<?php echo static::e($datos["txtOperario"]); ?>">
- <?php if(isset($errores["txtOperario"])): ?>
- <span class="error"><?php echo static::e($errores["txtOperario"]); ?></span>
- <?php endif; ?>
+ <?=VerErrores("txtOperario")?>
  </td>
  <td>
  <label for="txtAdmin">Administrador</label>
  <input type="text" id="txtAdmin" name="txtAdmin" value="<?php echo static::e($datos["txtAdmin"]); ?>">
- <?php if(isset($errores["txtAdmin"])): ?>
- <span class="error"><?php echo static::e($errores["txtAdmin"]); ?></span>
- <?php endif; ?>
+ <?=VerErrores("txtAdmin")?>
+
  </td>
  </tr>
  <tr>
- <td>
- <label for="fecha_creacion">Fecha de Creación</label>
- <input type="text" id="fecha_creacion" name="fecha_creacion" placeholder="dd-mm-yyyy"  value="<?php echo static::e($datos["fecha_creacion"]); ?>">
- <?php if(isset($errores["fecha_creacion"])): ?>
- <span class="error"><?php echo static::e($errores["fecha_creacion"]); ?></span>
- <?php endif; ?>
- </td>
  <?php if($action == "mod"): ?>
  <td>
- <label for="fecha_realizacion">Fecha Realizacion</label>
- <input type="text" id="fecha_realizacion" name="fecha_realizacion" placeholder="yyyy-mm-dd"  value="<?php echo static::e($datos["fecha_realizacion"]); ?>">
- <?php if(isset($errores["fecha_realizacion"])): ?>
- <span class="error"><?php echo static::e($errores["fecha_realizacion"]); ?></span>
+ <label for="fecha_creacion">Fecha de Creación</label>
+ <input type="text" id="fecha_creacion" name="fecha_creacion" placeholder="dd-mm-yyyy"  value="<?php echo static::e($datos["fecha_creacion"]); ?>"
+ <?php if($action == "mod"): ?>
+ disabled
+ >
+ <input type="hidden" name="fecha_creacion" value="<?php echo static::e($datos["fecha_creacion"]); ?>"
  <?php endif; ?>
+ >
+ <?=VerErrores("fecha_creacion")?>
+ </td>
+ <td>
+ <label for="fecha_realizacion">Fecha Realizacion</label>
+ <input type="text" id="fecha_realizacion" name="fecha_realizacion" placeholder="dd-mm-yyyy"  value="<?php echo static::e($datos["fecha_realizacion"]); ?>">
+ <?=VerErrores("fecha_realizacion")?>
+
  </td>
  <?php endif; ?>
  </tr>
@@ -55,16 +73,13 @@
  <td>
  <label for="txtDireccion">Dirección</label>
  <input type="text" id="txtDireccion" name="txtDireccion"  value="<?php echo static::e($datos["txtDireccion"]); ?>">
- <?php if(isset($errores["txtDireccion"])): ?>
- <span class="error"><?php echo static::e($errores["txtDireccion"]); ?></span>
- <?php endif; ?>
+ <?=VerErrores("txtDireccion")?>
+
  </td>
  <td>
  <label for="txtPoblacion">Población</label>
  <input type="text" id="txtPoblacion" name="txtPoblacion" value="<?php echo static::e($datos["txtPoblacion"]); ?>">
- <?php if(isset($errores["txtPoblacion"])): ?>
- <span class="error"><?php echo static::e($errores["txtPoblacion"]); ?></span>
- <?php endif; ?>
+ <?=VerErrores("txtPoblacion")?>
  </td>
  </tr>
  <tr>
@@ -72,23 +87,27 @@
  <label for="provincia">Provincia</label>
  <select name="provincia" id="provincia">
  <?php $__currentLoopData = $provincias; $this->addLoop($__currentLoopData); foreach($__currentLoopData as $provincia): $this->incrementLoopIndices(); $loop = $this->getFirstLoop(); ?>
+ <?php if($provincia === $datos["provincia"]): ?>
+ <option value="<?php echo static::e($provincia); ?>" selected="selected"><?php echo static::e($provincia); ?></option>
+ <?php else: ?>
  <option value="<?php echo static::e($provincia); ?>"><?php echo static::e($provincia); ?></option>
+ <?php endif; ?>
  <?php endforeach; $this->popLoop(); $loop = $this->getFirstLoop(); ?>
  </select></td>
  <td>
  <label for="txtCP">Código Postal</label>
  <input type="text" id="txtCP" name="txtCP"  value="<?php echo static::e($datos["txtCP"]); ?>">
- <?php if(isset($errores["txtCP"])): ?>
- <span class="error"><?php echo static::e($errores["txtCP"]); ?></span>
- <?php endif; ?>
+ <?=VerErrores("txtCP")?>
+
  </td>
  </tr>
  <?php if($action == "mod"): ?>
  <tr>
- <td><label for="estado">Estado</label></td>
- <td><input type="radio" name="estado" value="R">Realizada
- <input type="radio" name="estado" value="P">Pendiente
- <input type="radio" name="estado" value="C">Cancelada</td>
+ <td colspan="2"><label for="estado">Estado: </label>
+ <input type="radio" name="estado" value="R" <?php if($datos["estado"] ==="R"): ?> checked="checked" <?php endif; ?>>Realizada
+ <input type="radio" name="estado" value="P" <?php if($datos["estado"] ==="P"): ?> checked="checked" <?php endif; ?>>Pendiente
+ <input type="radio" name="estado" value="C" <?php if($datos["estado"] ==="C"): ?> checked="checked" <?php endif; ?>>Cancelada
+ </td>
  </tr>
  <?php else: ?>
  <input type="hidden" name="estado" value="P">
@@ -107,19 +126,19 @@
  </tr>
  <tr>
  <td>
- <textarea name="anotaciones_ant" id="anotaciones_ant" cols="50" rows="10" value="<?php echo static::e($datos["anotaciones_ant"]); ?>"></textarea>
+ <textarea name="anotaciones_ant" id="anotaciones_ant" cols="50" rows="10"><?php echo static::e($datos["anotaciones_ant"]); ?></textarea>
  </td>
  <?php if($action == "mod"): ?>
 
  <td>
- <textarea name="anotaciones_pos" id="anotaciones_pos" cols="50" rows="10" value="<?php echo static::e($datos["anotaciones_pos"]); ?>"></textarea>
+ <textarea name="anotaciones_pos" id="anotaciones_pos" cols="50" rows="10"><?php echo static::e($datos["anotaciones_pos"]); ?></textarea>
  </td>
  <?php endif; ?>
  </tr>
 </table>
+ <input type="hidden" name="id" id="id" value="<?php echo static::e($id); ?>">
  <input type="hidden" name="action" value="<?php echo static::e($action); ?>">
  <input type="submit" value="Aceptar">
-
 </form>
 </body>
 </html>

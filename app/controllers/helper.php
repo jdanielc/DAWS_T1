@@ -16,3 +16,17 @@ function VerErrores($campo)
         echo "<p style='color: red'>".$errores[$campo]."</p>";
     }
 }
+
+function MakeURL($ctrl, $action='', $parameters='')
+{
+    if ($action=='')
+    {
+        $action=self::$instance->defaultAction;
+    }
+    $url="?".self::CTRL."=$ctrl&".self::ACTION."=$action";
+    if ($parameters)
+    {
+        $url.="&".$parameters;
+    }
+    return $url;
+}

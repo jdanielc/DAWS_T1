@@ -22,8 +22,8 @@
  <td>Anotaciones Posteriores</td>
  </tr>
  <tr>
- <td><textarea name="texto_previo" id="texto_previo" cols="50" rows="10"></textarea></td>
- <td><textarea name="texto_posterior" id="texto_posterior" cols="50" rows="10"></textarea></td>
+ <td><textarea name="texto_previo" id="texto_previo" cols="50" rows="10"><?php echo static::e($tarea->getAnotacionesAnt()); ?></textarea></td>
+ <td><textarea name="texto_posterior" id="texto_posterior" cols="50" rows="10"><?php echo static::e($tarea->getAnotacionesPost()); ?></textarea></td>
  </tr>
  </table>
  <input type="submit" value="Aceptar">

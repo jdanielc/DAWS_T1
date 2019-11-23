@@ -1,82 +1,46 @@
 <?php
 
 require_once __DIR__ . "/../config.php";
+require_once DIR_PROYECTO."/models/Tarea.php";
 include_once DIR_PROYECTO . "/controllers/ctr_Tareas.php";
-include_once DIR_PROYECTO . "/controllers/ctr_paginacion.php";
+include_once DIR_PROYECTO."/controllers/ctr_compDatos.php";
 
 if (isset($_POST["action"])) {
-    $datos = $_POST;
     $errores = array();
     $enviar = array();
 
-    if (!isset($datos["txtOperario"]) || !is_numeric($datos["txtOperario"])) {
-        $errores["txtOperario"] = "Introduzca un operario";
+    list($errores, $enviar) = comprobarDatosBasicos($errores, $enviar);
+
+    //Unicos dos campos que son requeridos aparte de los esenciales
+
+    if (!IsPost("fecha_realizacion")) {
+        $errores["fecha_realizacion"] = "Introduzca una fecha valida";
     } else {
-        $enviar["txtOperario"] = $datos["txtOperario"];
-    }
 
-
-    if (!isset($datos["txtAdmin"]) || !is_numeric($datos["txtAdmin"])) {
-        $errores["txtAdmin"] = "Introduzca un administrador";
-    } else {
-        $enviar["txtAdmin"] = $datos["txtAdmin"];
-    }
-
-
-    if (!isset($datos["fecha_creacion"])) {
-        $errores["fecha_creacion"] = "Introduzca una fecha valida";
-    } else {
-        $f1 = $datos["fecha_creacion"];
-        $d1 = date("Y-m-d", strtotime($f1));
-        if (time() < $d1) {
-            $errores["fecha_creacion"] = "Introduzca una fecha valida";
+        $d1 = strtotime(ValorPost("fecha_realizacion"));
+        if (isValidDate($d1, false) && $d1 != false) {
+            $enviar["fecha_realizacion"] = date("Y-m-d", $d1);
         } else {
-            $enviar["fecha_creacion"] = $d1;
+            $errores["fecha_realizacion"] = "Introduzca una fecha valida";
         }
     }
 
-    if (!isset($datos["txtDireccion"])) {
-        $errores["txtDireccion"] = "Introduzca una direccion";
+
+    if (!IsPost("anotaciones_pos")) {
+        $enviar["anotaciones_pos"] = "";
     } else {
-        $enviar["txtDireccion"] = $datos["txtDireccion"];
+        $enviar["anotaciones_pos"] = ValorPost("anotaciones_pos");
     }
 
-    if (!isset($datos["provincia"])) {
-        $errores["provincia"] = "Introduzca una provincia";
-    } else {
-        $enviar["provincia"] = $datos["provincia"];
-    }
-    if (!isset($datos["txtCP"]) || strlen($datos["txtCP"]) != 5) {
-        $errores["txtCP"] = "Introduzca un codigo postal";
-    } else {
-        $enviar["txtCP"] = $datos["txtCP"];
-    }
-
-    if (!isset($datos["txtPoblacion"])) {
-        $errores["txtPoblacion"] = "Introduzca una población";
-    } else {
-        $enviar["txtPoblacion"] = $datos["txtPoblacion"];
-    }
-
-    if (!isset($datos["estado"])) {
-        $errores["estado"] = "";
-    } else {
-        $enviar["estado"] = $datos["estado"];
-    }
-
-    if (!isset($datos["anotaciones_ant"])) {
-        $enviar["anotaciones_ant"] = "";
-    } else {
-        $enviar["anotaciones_ant"] = $datos["anotaciones_ant"];
-    }
-
+    $id = $_POST["id"];
     if (sizeof($errores) > 0) {
-        echo $blade->run("CRUD.formulario", ["errores" => $errores, "action" => "mod", "provincias" => $provincias, "datos" => $datos]);
+
+        echo $blade->run("CRUD.formulario", ["errores" => $errores, "action" => "mod", "provincias" => $provincias,"id" => $id, "datos" => $_POST]);
     } else {
-        $result = NuevaTarea($enviar);
+        $result = UpdateTarea($id, $enviar);
         if ($result) {
 
-            header("Location: ctr_verTareas.php?page=" . $total_pages);
+            header("Location: ctr_verTareas.php");
         }
     }
 
