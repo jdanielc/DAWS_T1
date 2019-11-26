@@ -1,11 +1,13 @@
 <?php
 require_once __DIR__."/../config.php";
 require_once DIR_PROYECTO."/models/Tarea.php";
+require_once DIR_PROYECTO."/controllers/ctr_compDatos.php";
 include_once DIR_PROYECTO."/controllers/ctr_Tareas.php";
 
 if(isset($_POST["action"])){
     $action = $_POST["action"];
-    $id = $_POST["id"];
+
+        $id = ValorPost("id");
 
 
     $errores = array();

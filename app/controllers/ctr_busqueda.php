@@ -18,19 +18,10 @@ if(IsPost("buscar") || isset($_SESSION["buscar"])){
         $tareas = array();
         while ($row = $result->fetch()){
             $tarea = new Tarea($row["id"]);
-            array_push($tareas, $tarea);
+            array_push($tareas, setAdminAndOp($tarea));
         }
 
-        $total_results = count($tareas);
-        $limit = 4;
-        $total_pages = intval(ceil($total_results/$limit));
-
-        $page = 1;
-        if (!isset($_GET['page'])) {
-            $page = 1;
-        } else{
-            $page = $_GET['page'];
-        }
+    include_once DIR_PROYECTO."/controllers/ctr_Paginacion.php";
 
         $starting_limit = ($page-1)*$limit;
         $_SESSION["buscar"] = $datosBuscar;

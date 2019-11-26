@@ -8,7 +8,6 @@ function VerErrores($campo)
  }
 }
 ?>
-
 <html>
 <?php if($action == "add"): ?>
  <?php echo $this->runChild("\..\header.header", array('titulo'=>"Añadir Tarea")); ?>
@@ -18,7 +17,8 @@ function VerErrores($campo)
 
 <?php endif; ?>
 <body>
-<h2 class="title">
+<div class="titulo">
+ <h2 class="title">
  <?php if($action === "mod"): ?>
  Modificar Tarea
  <?php elseif($action === "add"): ?>
@@ -27,6 +27,9 @@ function VerErrores($campo)
  Formulario
  <?php endif; ?>
 </h2>
+ <p></p>
+</div>
+
 <form     <?php if($action == "mod"): ?>
  action="ctr_modTarea.php"
  <?php elseif($action == "add"): ?>
@@ -34,7 +37,7 @@ function VerErrores($campo)
  <?php endif; ?>
  method="post">
 
-<table id="formulario">
+<table id="formulario" class="table table-bordered">
  <tr>
  <td>
  <label for="txtOperario">Operario</label>
@@ -78,7 +81,10 @@ function VerErrores($campo)
  </td>
  <td>
  <label for="txtPoblacion">Población</label>
- <input type="text" id="txtPoblacion" name="txtPoblacion" value="<?php echo static::e($datos["txtPoblacion"]); ?>">
+ <!--<input type="text" id="txtPoblacion" name="txtPoblacion" value="<?php echo static::e($datos["txtPoblacion"]); ?>">-->
+ <select name="txtPoblacion" id="txtPoblacion">
+ </select>
+
  <?=VerErrores("txtPoblacion")?>
  </td>
  </tr>
@@ -86,13 +92,7 @@ function VerErrores($campo)
  <td>
  <label for="provincia">Provincia</label>
  <select name="provincia" id="provincia">
- <?php $__currentLoopData = $provincias; $this->addLoop($__currentLoopData); foreach($__currentLoopData as $provincia): $this->incrementLoopIndices(); $loop = $this->getFirstLoop(); ?>
- <?php if($provincia === $datos["provincia"]): ?>
- <option value="<?php echo static::e($provincia); ?>" selected="selected"><?php echo static::e($provincia); ?></option>
- <?php else: ?>
- <option value="<?php echo static::e($provincia); ?>"><?php echo static::e($provincia); ?></option>
- <?php endif; ?>
- <?php endforeach; $this->popLoop(); $loop = $this->getFirstLoop(); ?>
+
  </select></td>
  <td>
  <label for="txtCP">Código Postal</label>
@@ -138,7 +138,12 @@ function VerErrores($campo)
 </table>
  <input type="hidden" name="id" id="id" value="<?php echo static::e($id); ?>">
  <input type="hidden" name="action" value="<?php echo static::e($action); ?>">
- <input type="submit" value="Aceptar">
+ <input type="submit" value="Aceptar" class="btn btn-primary" id="bt_aceptar">
+</form>
+<form action="ctr_verTareas.php" id="form_back">
+ <button type="submit" class="btn btn-primary">
+ <i class='fas fa-arrow-left'></i>Volver
+ </button>
 </form>
 </body>
 </html>

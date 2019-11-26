@@ -116,3 +116,16 @@ function ValorPost($nombreCampo, $valorPorDefecto='')
     else
         return $valorPorDefecto;
 }
+
+function isAdmin(){
+    if (isset($_SESSION["usuario"])){
+        $usuario = unserialize($_SESSION["usuario"]);
+
+        if($usuario->getRol()){
+            return true;
+        }else{
+            return false;
+        }
+
+    }
+}

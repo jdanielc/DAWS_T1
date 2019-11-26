@@ -4,7 +4,7 @@
 @include("\..\header.header", array('titulo'=>"Ver Tareas"))
 
 <body>
-<div id="titulo">
+<div class="titulo">
     <h2>Tareas Existentes</h2>
 </div>
 
@@ -13,17 +13,21 @@
         <input type="hidden" name="action" value="add"/>
         <button class="btn btn-link"><i class="fas fa-plus"></i>Añadir Tarea</button>
     </form>
+    @if(isset($busqueda))
+        <form action="ctr_verTareas.php" id="form_back">
+            <button type="submit" class="btn btn-link">
+                <i class='fas fa-arrow-left'></i>Volver
+            </button>
+        </form>
+    @endif
     <form action="ctr_busqueda.php" method="post" id="form_seach">
         <div>
             <input type="text" placeholder="Buscar..." id="buscar" name="buscar" @if(isset($busqueda)) value="{{$busqueda}}" @endif>
-            <input type="submit" value="Buscar" class="btn btn-light">
+            <button type="submit" class="btn btn-light">
+                <i class='fas fa-search'></i>Buscar
+            </button>
         </div>
     </form>
-    @if(isset($busqueda))
-    <form action="ctr_verTareas.php">
-        <input type="submit" value="Volver">
-    </form>
-    @endif
 </div>
 
 <div class="row">

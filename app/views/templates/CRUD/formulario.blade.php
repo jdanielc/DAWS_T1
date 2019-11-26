@@ -8,7 +8,6 @@ function VerErrores($campo)
     }
 }
 ?>
-
 <html>
 @if($action == "add")
     @include("\..\header.header", array('titulo'=>"Añadir Tarea"))
@@ -18,7 +17,8 @@ function VerErrores($campo)
 
 @endif
 <body>
-<h2 class="title">
+<div class="titulo">
+    <h2 class="title">
     @if($action === "mod")
         Modificar Tarea
         @elseif($action === "add")
@@ -27,6 +27,9 @@ function VerErrores($campo)
         Formulario
         @endif
 </h2>
+    <p></p>
+</div>
+
 <form     @if($action == "mod")
    action="ctr_modTarea.php"
         @elseif($action == "add")
@@ -34,7 +37,7 @@ function VerErrores($campo)
                 @endif
                  method="post">
 
-<table id="formulario">
+<table id="formulario" class="table table-bordered">
     <tr>
         <td>
             <label for="txtOperario">Operario</label>
@@ -78,21 +81,18 @@ function VerErrores($campo)
         </td>
         <td>
             <label for="txtPoblacion">Población</label>
-            <input type="text" id="txtPoblacion" name="txtPoblacion" value="{{$datos["txtPoblacion"]}}">
-            <?=VerErrores("txtPoblacion")?>
+            <!--<input type="text" id="txtPoblacion" name="txtPoblacion" value="{{$datos["txtPoblacion"]}}">-->
+            <select name="txtPoblacion" id="txtPoblacion">
+            </select>
+
+        <?=VerErrores("txtPoblacion")?>
         </td>
     </tr>
     <tr>
         <td>
             <label for="provincia">Provincia</label>
             <select name="provincia" id="provincia">
-                @foreach($provincias as $provincia)
-                    @if($provincia === $datos["provincia"])
-                        <option value="{{$provincia}}" selected="selected">{{$provincia}}</option>
-                    @else
-                    <option value="{{$provincia}}">{{$provincia}}</option>
-                    @endif
-                    @endforeach
+
             </select></td>
         <td>
             <label for="txtCP">Código Postal</label>
@@ -138,7 +138,12 @@ function VerErrores($campo)
 </table>
     <input type="hidden" name="id" id="id" value="{{$id}}">
         <input type="hidden" name="action" value="{{$action}}">
-        <input type="submit" value="Aceptar">
+        <input type="submit" value="Aceptar" class="btn btn-primary" id="bt_aceptar">
+</form>
+<form action="ctr_verTareas.php" id="form_back">
+    <button type="submit" class="btn btn-primary">
+        <i class='fas fa-arrow-left'></i>Volver
+    </button>
 </form>
 </body>
 </html>

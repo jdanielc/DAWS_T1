@@ -7,7 +7,23 @@ class Empleado{
     private $tlf;
     private $email;
     private $rol;
+    private $password;
 
+    /**
+     * @return mixed
+     */
+    public function getPassword()
+    {
+        return $this->password;
+    }
+
+    /**
+     * @param mixed $password
+     */
+    public function setPassword($password)
+    {
+        $this->password = $password;
+    }
     /**
      * @return mixed
      */
@@ -106,24 +122,30 @@ class Empleado{
 
     public function __construct($id1 = null)
     {
-        if($id1 != null){
-            $db = Database::getInstance();
-            $stmt = $db->query("SELECT * FROM table_empleado WHERE id = (?)");
+        if($id1 != null) {
+            try {
 
-            $stmt->bindParam(1, $id1, PDO::PARAM_INT);
 
-            $stmt->setFetchMode(PDO::FETCH_ASSOC);
-            $stmt->execute();
-            $row = $stmt->fetch();
-            //Asigno valores
-            $this->id = $row["id"];
-            $this->nombre = $row["emp_nombre"];
-            $this->apellido = $row["emp_apellido"];
-            $this->tlf = $row["tlf"];
-            $this->email = $row["email"];
-            $this->rol = $row["rol"];
+                $db = Database::getInstance();
+                $stmt = $db->prepare("SELECT * FROM table_empleado WHERE id = (?)");
+
+                $stmt->bindParam(1, $id1, PDO::PARAM_INT);
+
+                $stmt->setFetchMode(PDO::FETCH_ASSOC);
+                $stmt->execute();
+                $row = $stmt->fetch();
+                //Asigno valores
+                $this->id = $row["id"];
+                $this->nombre = $row["emp_nombre"];
+                $this->apellido = $row["emp_apellido"];
+                $this->tlf = $row["emp_tlf"];
+                $this->email = $row["emp_email"];
+                $this->rol = $row["emp_rol"];
+                $this->password = $row["password"];
+            }catch (Exception $exception){
+
+            }
         }
-
         //https://www.php.net/manual/es/language.types.object.php
     }
 }

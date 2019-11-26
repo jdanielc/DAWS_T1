@@ -1,6 +1,7 @@
 <?php
 
 require_once DIR_PROYECTO."/models/Database.php";
+require_once DIR_PROYECTO."/models/Empleado.php";
 
 function GetTareas()
 {
@@ -139,14 +140,13 @@ function BorrarTareas($id){
 function BuscarTareas($dato){
 
     try{
-
         $db = Database::getInstance();
-        /*
-        $stmt = ("SELECT * FROM table_tarea WHERE CONCAT(`tsk_operario` ,`tsk_administrativo` ,`tsk_fecha_creacion` ,`tsk_fecha_realizacion` 
-        ,`tsk_direccion` ,`tsk_poblacion` ,`tsk_provincia` ,`tsk_cp` ,`tsk_estado` ,`tsk_anotaciones_ant` ,`tsk_anotaciones_post` ) like '%(?)%'");
-        */
-        //TODO: ARREGLAR SQL
-        $stmt = ("SELECT * FROM `table_tarea` WHERE (`tsk_operario` LIKE :dato) OR (`tsk_administrativo` LIKE :dato) OR (`tsk_fecha_creacion`LIKE :dato) OR (`tsk_fecha_realizacion` LIKE :dato) OR (`tsk_direccion` LIKE :dato) OR (`tsk_poblacion` LIKE :dato) OR (`tsk_provincia` LIKE :dato) OR (`tsk_cp` LIKE :dato) OR (`tsk_estado` LIKE :dato) OR (`tsk_anotaciones_ant` LIKE :dato) OR (`tsk_anotaciones_post` LIKE :dato)");
+        $stmt = ("SELECT * FROM `table_tarea` WHERE (`tsk_operario` LIKE :dato) OR
+                                  (`tsk_administrativo` LIKE :dato) OR (`tsk_fecha_creacion`LIKE :dato) OR 
+                                  (`tsk_fecha_realizacion` LIKE :dato) OR (`tsk_direccion` LIKE :dato) OR 
+                                  (`tsk_poblacion` LIKE :dato) OR (`tsk_provincia` LIKE :dato) OR (`tsk_cp` LIKE :dato) OR 
+                                  (`tsk_estado` LIKE :dato) OR (`tsk_anotaciones_ant` LIKE :dato) OR 
+                                  (`tsk_anotaciones_post` LIKE :dato)");
         $result = $db->prepare($stmt);
         $dato = "%".$dato."%";
         $result->bindParam(":dato", $dato);
@@ -157,5 +157,18 @@ function BuscarTareas($dato){
         throw new Exception( $exception->getMessage( ) , (int)$exception->getCode( ) );
 
     }
+}
+
+function setAdminAndOp($tarea){
+    $operario = $tarea -> getOperario();
+    $administrador = $tarea-> getAdministrativo();
+
+    $empleado = new Empleado($operario);
+    $tarea->setOperario($empleado->getNombre());
+
+    $empleado = new Empleado($administrador);
+    $tarea->setAdministrativo($empleado->getNombre());
+
+    return $tarea;
 }
 

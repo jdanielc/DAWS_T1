@@ -1,17 +1,18 @@
 <?php $anterior =@ $page -1; ?>
 <?php $siguiente =@ $page +1; ?>
-
+<ul class="pagination justify-content-center">
 <?php if($page != 1 and $page != 0): ?>
- <a href="?page=<?php echo static::e($anterior); ?>" class="links">Anterior</a>
+ <li class="page-item"> <a href="?page=<?php echo static::e($anterior); ?>" class="page-link">Anterior</a></li>
  <?php endif; ?>
 
 <?php $pagina =@ $page; ?>
 <?php for($pagina = 1; $pagina <= $total_pages; $pagina++): ?>
- <a href="?page=<?php echo static::e($pagina); ?>" class="links"><?php echo static::e($pagina); ?></a>
+ <li class="page-item"> <a href="?page=<?php echo static::e($pagina); ?>" class="page-link"><?php echo static::e($pagina); ?></a></li>
  <?php endfor; ?>
 
 <?php if($page < $total_pages or $page === $total_pages): ?>
  <?php if($total_pages>1): ?>
- <a href="?page=<?php echo static::e($siguiente); ?>" class="links">Siguiente</a>
+ <li class="page-item">  <a href="?page=<?php echo static::e($siguiente); ?>" class="page-link">Siguiente</a></li>
  <?php endif; ?>
  <?php endif; ?>
+</ul>
