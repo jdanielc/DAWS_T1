@@ -20,7 +20,7 @@ function VerErrores($campo)
         <p><h2>Login de usuario:</h2></p>
     </div>
     <div class="container">
-        <form  action="ctr_Login.php" method="POST">
+        <form  action="" method="POST">
             <label for="name">Usuario:
                 <input type="text" name="usuario" class="" value="@if(isset($datos["usuario"])){{$datos["usuario"]}}@endif"/>
                 <?=VerErrores("usuario")?>

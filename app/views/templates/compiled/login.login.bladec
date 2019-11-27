@@ -20,7 +20,7 @@ function VerErrores($campo)
  <p><h2>Login de usuario:</h2></p>
  </div>
  <div class="container">
- <form  action="ctr_Login.php" method="POST">
+ <form  action="" method="POST">
  <label for="name">Usuario:
  <input type="text" name="usuario" class="" value="<?php if(isset($datos["usuario"])): ?><?php echo static::e($datos["usuario"]); ?><?php endif; ?>"/>
  <?=VerErrores("usuario")?>
@@ -31,7 +31,7 @@ function VerErrores($campo)
  <?=VerErrores("password")?>
  </label>
  <br/>
- <input type="submit" value="Aceptar">
+ <input type="submit" value="Aceptar" class="btn btn-primary">
  </form>
  </div>
 </div>

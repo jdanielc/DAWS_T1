@@ -5,8 +5,6 @@ define("DBPASSWORD", "");
 define("DBNOMBRE", "daw_proyecto_1");
 define("DIR_PROYECTO", __DIR__);
 
-
-
 include __DIR__ . '\..\lib\BladeOne.php';
 use eftec\bladeone\BladeOne;
 

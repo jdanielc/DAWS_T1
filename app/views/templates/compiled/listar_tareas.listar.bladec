@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <?php echo $this->runChild("\..\header.header", array('titulo'=>"Ver Tareas")); ?>
-
 <body>
 <div class="titulo">
  <h2>Tareas Existentes</h2>

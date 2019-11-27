@@ -12,6 +12,7 @@ table{
     table-layout: fixed;
 position: relative;
 }
+
 .table-wrap{
     padding-left: 0 !important;;
 }

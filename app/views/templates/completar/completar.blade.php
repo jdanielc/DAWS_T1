@@ -4,7 +4,7 @@
 <h2>Completar Tareas</h2>
 @include('\..\tabla_tareas.tabla_tarea', array('tarea'=>$tarea))
 <form action="" method="post">
-    <table id="t_complete" class="table table-bordered">
+    <table id="t_complete" class="table">
         <input type="hidden" name="id" value="{{$id}}"/>
         @if($tarea->getEstado() != "R")
         <tr>

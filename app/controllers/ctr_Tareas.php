@@ -2,7 +2,10 @@
 
 require_once DIR_PROYECTO."/models/Database.php";
 require_once DIR_PROYECTO."/models/Empleado.php";
-
+/**
+ * @return bool|PDOStatement
+ * @throws Exception
+ */
 function GetTareas()
 {
     try{
@@ -61,6 +64,12 @@ function SaveTarea($id, $datos_tarea)
 
 }
 
+/**
+ * @param $id
+ * @param $datos
+ * @return bool
+ * @throws Exception
+ */
 function UpdateTarea($id, $datos){
     try {
 
@@ -122,6 +131,11 @@ function NuevaTarea($datos)
     }
 }
 
+/**
+ * @param $id
+ * @return bool
+ * @throws Exception
+ */
 function BorrarTareas($id){
     try{
         $db = Database::getInstance();
@@ -137,6 +151,11 @@ function BorrarTareas($id){
 
 }
 
+/**
+ * @param $dato
+ * @return bool|PDOStatement
+ * @throws Exception
+ */
 function BuscarTareas($dato){
 
     try{
@@ -159,6 +178,10 @@ function BuscarTareas($dato){
     }
 }
 
+/**
+ * @param $tarea
+ * @return mixed
+ */
 function setAdminAndOp($tarea){
     $operario = $tarea -> getOperario();
     $administrador = $tarea-> getAdministrativo();

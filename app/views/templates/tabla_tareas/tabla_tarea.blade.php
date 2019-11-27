@@ -1,4 +1,4 @@
-<table>
+<table class="table table-bordered">
     <tr>
         <th>Operario</th>
         <th>Administrativo</th>

@@ -4,7 +4,7 @@
 <h2>Completar Tareas</h2>
 <?php echo $this->runChild('\..\tabla_tareas.tabla_tarea', array('tarea'=>$tarea)); ?>
 <form action="" method="post">
- <table id="t_complete">
+ <table id="t_complete" class="table">
  <input type="hidden" name="id" value="<?php echo static::e($id); ?>"/>
  <?php if($tarea->getEstado() != "R"): ?>
  <tr>
@@ -27,6 +27,11 @@
  </tr>
  </table>
  <input type="submit" value="Aceptar">
+ <form action="ctr_verTareas.php" id="form_back">
+ <button type="submit" class="btn btn-link">
+ <i class='fas fa-arrow-left'></i>Volver
+ </button>
+ </form>
 </form>
 </body>
 </html>

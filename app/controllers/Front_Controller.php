@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__."/../config.php";
+
 /**
  * Description of Front_Controller
  */
@@ -6,7 +8,8 @@ class Front_Controller {
     
     const CTRL='c';
     const ACTION='a';
-    
+    const PAGE = 'page';
+
     static private $instance=NULL; 
     
     protected $defaultController='';
@@ -18,7 +21,7 @@ class Front_Controller {
      * @param type $defaultController
      * @param type $defaultAction
      */
-    private function __construct($defaultController, $defaultAction='Index') {
+    private function __construct($defaultController, $defaultAction='index') {
         $this->defaultController=$defaultController;
         $this->defaultAction=$defaultAction;
     }
@@ -45,7 +48,7 @@ class Front_Controller {
         $accName = isset($_GET[self::ACTION]) ? $_GET[self::ACTION] : $this->defaultAction;
 
         // Nombre del fichero a incluir
-        $ctrl_file=CTRL_PATH.$ctrlName.'.php';
+        $ctrl_file=CTR_PATH.$ctrlName.'.php';
         if (file_exists($ctrl_file))
         {
             include($ctrl_file);
@@ -58,13 +61,13 @@ class Front_Controller {
             $this->Error404('<p>No existe el fichero :$ctrl_file</p>');
         }
     }
-
     /**
      * Página de error
      * @param type $msg
      */
     public function Error404($msg)
     {
+
         // Error 404
          VerVista('plantilla/layout', array(
              'titulo'=>'Acción inexistente',

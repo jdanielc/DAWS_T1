@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
-
 @include("\..\header.header", array('titulo'=>"Ver Tareas"))
-
 <body>
 <div class="titulo">
     <h2>Tareas Existentes</h2>

@@ -6,7 +6,13 @@ function VerErrores($campo)
     {
         echo "<p style='color: red'>".$errores[$campo]."</p>";
     }
+
 }
+session_start();
+
+$_SESSION["provincia"] = $datos["provincia"];
+$_SESSION["municipios"] = $datos["txtPoblacion"];
+
 ?>
 <html>
 @if($action == "add")
@@ -82,7 +88,9 @@ function VerErrores($campo)
         <td>
             <label for="txtPoblacion">Población</label>
             <!--<input type="text" id="txtPoblacion" name="txtPoblacion" value="{{$datos["txtPoblacion"]}}">-->
-            <select name="txtPoblacion" id="txtPoblacion">
+
+            <select name="txtPoblacion" id="txtPoblacion" value="{{$datos["txtPoblacion"]}}">
+                <option></option>
             </select>
 
         <?=VerErrores("txtPoblacion")?>
@@ -91,7 +99,7 @@ function VerErrores($campo)
     <tr>
         <td>
             <label for="provincia">Provincia</label>
-            <select name="provincia" id="provincia">
+            <select name="provincia" id="provincia" value="{{$datos["provincia"]}}">
 
             </select></td>
         <td>
