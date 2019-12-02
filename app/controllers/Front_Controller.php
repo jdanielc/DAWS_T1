@@ -1,14 +1,17 @@
 <?php
-require_once __DIR__."/../config.php";
-
+require_once APP_PATH."config.php";
+include_once DIR_PROYECTO."/controllers/ctr_Empleado.php";
+include_once DIR_PROYECTO."/controllers/ctr_compDatos.php";
+require_once DIR_PROYECTO."/models/Empleado.php";
 /**
  * Description of Front_Controller
  */
 class Front_Controller {
-    
+
     const CTRL='c';
     const ACTION='a';
     const PAGE = 'page';
+    private $blade;
 
     static private $instance=NULL; 
     
@@ -52,12 +55,13 @@ class Front_Controller {
         if (file_exists($ctrl_file))
         {
             include($ctrl_file);
-            
+
             $ctrl=new $ctrlName();
             $ctrl->{$accName}();
         }
         else
-        {   // Error 404
+        {
+            // Error 404
             $this->Error404('<p>No existe el fichero :$ctrl_file</p>');
         }
     }
@@ -67,13 +71,8 @@ class Front_Controller {
      */
     public function Error404($msg)
     {
-
         // Error 404
-         VerVista('plantilla/layout', array(
-             'titulo'=>'Acción inexistente',
-             'menu'=>CargaVista('plantilla/menu'),
-             'cuerpo'=>'<div>No está definida la acción indicada</div>',
-         ));
+        echo $blade-> run("error.error", ["msg"=>$msg]);
     }
 
     /**
@@ -96,5 +95,4 @@ class Front_Controller {
         }
         return $url;
     }
-    
 }

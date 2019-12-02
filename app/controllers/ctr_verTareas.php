@@ -4,6 +4,8 @@ require_once DIR_PROYECTO."/models/Tarea.php";
 require_once DIR_PROYECTO."/models/Empleado.php";
 include_once DIR_PROYECTO."/controllers/ctr_Tareas.php";
 
+include_once DIR_PROYECTO."/controllers/ctr_usuario.php";
+
 if(isset($_GET["borrado"])){
     echo "<script type='text/javascript'>alert('Tarea Elminada');</script>";
 }

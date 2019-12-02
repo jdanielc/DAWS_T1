@@ -8,7 +8,7 @@ define("DIR_PROYECTO", __DIR__);
 include __DIR__ . '\..\lib\BladeOne.php';
 use eftec\bladeone\BladeOne;
 
-$blade = new BladeOne(__DIR__ . '\views\templates',
+ $blade= new BladeOne(__DIR__ . '\views\templates',
     __DIR__.'\views\templates\compiled', BladeOne::MODE_DEBUG);
 
 $provincias = ['Alava','Albacete','Alicante','Almería','Asturias','Avila','Badajoz','Barcelona','Burgos','Cáceres',

@@ -8,7 +8,7 @@
  */
 function CargaVista($vista, array  $variablesDeVista=NULL)
 {
-    $ficheroVista=VIEW_PATH.$vista.'.php';
+    $ficheroVista=VISTAS_PATH.$vista.'.php';
     if (! file_exists($ficheroVista)) {
         // Nada que incluir
         $htmlError="<div>No existe la vista $vista<br/>Fichero:$ficheroVista</div>";

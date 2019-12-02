@@ -1,4 +1,12 @@
 <?php
+
+require_once "ctr_compDatos.php";
+
+$admin = false;
+if (isAdmin()){
+    $admin = true;
+}
+
 $total_results = count($tareas);
 $limit = 4;
 $total_pages = intval(ceil($total_results/$limit));

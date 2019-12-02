@@ -1,10 +1,9 @@
 <?php
-
-session_start();
-require_once __DIR__."/../config.php";
+require_once APP_PATH."config.php";
 include_once DIR_PROYECTO."/controllers/ctr_Empleado.php";
 include_once DIR_PROYECTO."/controllers/ctr_compDatos.php";
 require_once DIR_PROYECTO."/models/Empleado.php";
+session_start();
 
 $errores = array();
 if(IsPost("usuario")){
