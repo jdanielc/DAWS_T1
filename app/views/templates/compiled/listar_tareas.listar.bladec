@@ -66,7 +66,7 @@
  <td><ul class="lista_botones">
  <li>
  <form action="ctr_borrarTarea.php" method="post">
- <input type="hidden" name="id" value="<?php echo static::e($tarea->getId()); ?>" />
+ <input type="hidden" name="id" value="<?php echo static::e($tarea->getId()); ?>"/>
  <button class="linkb"><i class="fas fa-trash-alt"></i> Eliminar</button>
  </form>
  </li>
@@ -77,9 +77,18 @@
  <button class="linkb"><i class="fas fa-edit"></i>Modificar</button>
  </form>
  </li>
+ <!--
  <li>
  <form action="ctr_completarTarea.php" method="post">
  <input type="hidden" name="id" value="<?php echo static::e($tarea->getId()); ?>" />
+ <button class="linkb"><i class="fas fa-check-circle"></i>Completar</button>
+ </form>
+ </li>
+ -->
+ <li>
+ <form action="Front_Controller.php" method="get">
+ <input type="hidden" name="id" value="<?php echo static::e($tarea->getId()); ?>" />
+ <input type="hidden" name="a" value="ctr_completarTarea.php">
  <button class="linkb"><i class="fas fa-check-circle"></i>Completar</button>
  </form>
  </li>

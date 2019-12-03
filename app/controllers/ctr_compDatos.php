@@ -117,6 +117,22 @@ function ValorPost($nombreCampo, $valorPorDefecto='')
         return $valorPorDefecto;
 }
 
+function IsGet($nombre_campo){
+    if (!isset($_GET[$nombre_campo]) || $_GET[$nombre_campo] === "" || $_GET[$nombre_campo] == null){
+        return false;
+    }else{
+        return true;
+    }
+}
+
+function ValorGET($nombreCampo, $valorPorDefecto='')
+{
+    if (isset($_GET[$nombreCampo]))
+        return $_GET[$nombreCampo];
+    else
+        return $valorPorDefecto;
+}
+
 function isAdmin(){
     if (isset($_SESSION["usuario"])){
         $usuario = unserialize($_SESSION["usuario"]);
@@ -126,6 +142,5 @@ function isAdmin(){
         }else{
             return false;
         }
-
     }
 }

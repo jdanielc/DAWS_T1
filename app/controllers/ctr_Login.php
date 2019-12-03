@@ -1,5 +1,10 @@
 <?php
-require_once APP_PATH."config.php";
+if (file_exists(APP_PATH."/config.php")){
+    require_once APP_PATH."/config.php";
+}else{
+    require_once "../config.php";
+
+}
 include_once DIR_PROYECTO."/controllers/ctr_Empleado.php";
 include_once DIR_PROYECTO."/controllers/ctr_compDatos.php";
 require_once DIR_PROYECTO."/models/Empleado.php";
@@ -56,6 +61,7 @@ if(IsPost("usuario")){
 
     if ($iscorrect){
         $_SESSION["usuario"] = serialize($usser);
+        //include ("ctr_verTareas.php");
         header("Location: app/controllers/ctr_verTareas.php");
     }else{
         echo $blade->run("login.login", ["errores"=>$errores, "datos"=>$datos]);

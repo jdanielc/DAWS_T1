@@ -5,9 +5,9 @@ require_once DIR_PROYECTO."/models/Empleado.php";
 include_once DIR_PROYECTO."/controllers/ctr_Tareas.php";
 include_once DIR_PROYECTO."/controllers/ctr_compDatos.php";
 
-if(isset($_POST["id"]) && !isset($_POST["estado"])){
+if(isset($_GET["id"]) && !isset($_GET["estado"])){
 
-    $id = $_POST["id"];
+    $id = ValorGET("id");
     $result = GetTarea($id);
     $t = $result->fetch();
     $tarea = new Tarea($t["id"]);
@@ -40,5 +40,7 @@ if(isset($_POST["id"]) && !isset($_POST["estado"])){
         if($result){
             header("Location: ctr_verTareas.php?page=".$page);
         }
+
+}else{
 
 }

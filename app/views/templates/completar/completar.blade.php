@@ -27,11 +27,12 @@
         </tr>
     </table>
     <input type="submit" value="Aceptar">
-    <form action="ctr_verTareas.php" id="form_back">
-        <button type="submit" class="btn btn-link">
-            <i class='fas fa-arrow-left'></i>Volver
-        </button>
-    </form>
+</form>
+<form action="Front_Controller.php" method="get">
+    <input type="hidden" value="ctr_verTareas.php" name="a">
+    <button type="submit" class="btn btn-link">
+        <i class='fas fa-arrow-left'></i>Volver
+    </button>
 </form>
 </body>
 </html>
