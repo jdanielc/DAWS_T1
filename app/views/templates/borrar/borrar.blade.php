@@ -2,7 +2,7 @@
 @include("\..\header.header", array('titulo'=>"Eliminar Tarea"))
 <body>
 <h2>Tareas A Eliminar</h2>
-<table>
+<table class="table table-bordered">
     <tr>
         <th>Operario</th>
         <th>Administrativo</th>

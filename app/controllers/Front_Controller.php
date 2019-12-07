@@ -10,9 +10,12 @@ include_once DIR_PROYECTO."/controllers/ctr_compDatos.php";
 define("ACTION", "a");
 
 if (IsGet(ACTION) && file_exists(ValorGET(ACTION))) {
+try{
+    include ValorGET(ACTION);
 
-include ValorGET(ACTION);
-//TODO: Por tu puta madre daniel termina esto en condiciones
+}catch (Exception $e){
+    echo $blade ->run();
+}
 } else {
     header("ctr_verTareas.php");
 }

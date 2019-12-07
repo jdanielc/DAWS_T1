@@ -114,6 +114,9 @@ function NuevaTarea($datos)
         $stmt = ("INSERT INTO table_tarea (tsk_operario, tsk_administrativo, tsk_fecha_creacion, tsk_direccion, tsk_poblacion, tsk_provincia, tsk_cp,tsk_estado, tsk_anotaciones_ant) VALUES 
 (:operario, :admin, :fecha, :direccion,:poblacion, :provincia, :cp, :estado, :anotacion )");
         $result = $db->prepare($stmt);
+
+
+
         $result->bindParam(":operario", $datos["txtOperario"], PDO::PARAM_INT);
         $result->bindParam(":admin", $datos["txtAdmin"]);
         $result->bindParam(":fecha", $datos["fecha_creacion"]);
@@ -182,6 +185,24 @@ function BuscarTareas($dato){
  * @param $tarea
  * @return mixed
  */
+
+function dataExist($id){
+    $db = Database::getInstance();
+    $stmt = ("SELECT * FROM table_empleado WHERE ID = (?)");
+    $result = $db->prepare($stmt);
+    $result->bindParam(1 , $id, PDO::PARAM_INT);
+    $result->setFetchMode(PDO::FETCH_ASSOC);
+    $result->execute();
+
+    $row = $result->fetch();
+    if ($row){
+        return true;
+    }else{
+        return false;
+    }
+
+}
+
 function setAdminAndOp($tarea){
     $operario = $tarea -> getOperario();
     $administrador = $tarea-> getAdministrativo();

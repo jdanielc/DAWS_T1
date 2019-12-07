@@ -8,7 +8,6 @@ function VerErrores($campo)
     }
 
 }
-session_start();
 
 $_SESSION["provincia"] = $datos["provincia"];
 $_SESSION["municipios"] = $datos["txtPoblacion"];
@@ -145,11 +144,19 @@ $_SESSION["municipios"] = $datos["txtPoblacion"];
     </tr>
 </table>
     <input type="hidden" name="id" id="id" value="{{$id}}">
-        <input type="hidden" name="action" value="{{$action}}">
-        <input type="submit" value="Aceptar" class="btn btn-primary" id="bt_aceptar">
+    <input type="hidden" name="action" value="{{$action}}">
+    <input type="submit" value="Aceptar" class="btn btn-primary" id="bt_aceptar">
 </form>
+<!--
 <form action="ctr_verTareas.php" id="form_back">
     <button type="submit" class="btn btn-primary">
+        <i class='fas fa-arrow-left'></i>Volver
+    </button>
+</form>
+-->
+<form action="Front_Controller.php" method="get">
+    <input type="hidden" value="ctr_verTareas.php" name="a">
+    <button type="submit" class="btn btn-link">
         <i class='fas fa-arrow-left'></i>Volver
     </button>
 </form>

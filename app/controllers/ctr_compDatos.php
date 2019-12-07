@@ -1,15 +1,15 @@
 <?php
 function comprobarDatosBasicos(array $errores, array $enviar)
 {
-    if (!is_numeric(ValorPost("txtOperario"))) {
-        $errores["txtOperario"] = "Introduzca un operario";
+    if (!is_numeric(ValorPost("txtOperario")) || !dataExist(ValorPost("txtOperario"))) {
+        $errores["txtOperario"] = "Introduzca un operario valido";
     } else {
         $enviar["txtOperario"] = ValorPost("txtOperario");
     }
 
 
-    if (!is_numeric(ValorPost("txtAdmin"))) {
-        $errores["txtAdmin"] = "Introduzca un administrador";
+    if (!is_numeric(ValorPost("txtAdmin")) || !dataExist(ValorPost("txtAdmin"))) {
+        $errores["txtAdmin"] = "Introduzca un administrador valido";
     } else {
         $enviar["txtAdmin"] = ValorPost("txtAdmin");
     }

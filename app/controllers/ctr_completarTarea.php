@@ -5,7 +5,10 @@ require_once DIR_PROYECTO."/models/Empleado.php";
 include_once DIR_PROYECTO."/controllers/ctr_Tareas.php";
 include_once DIR_PROYECTO."/controllers/ctr_compDatos.php";
 
-if(isset($_GET["id"]) && !isset($_GET["estado"])){
+$rol_necesario = 0;
+include_once "ctr_usuario.php";
+
+if(IsGet("id") && !IsPost("estado")){
 
     $id = ValorGET("id");
     $result = GetTarea($id);

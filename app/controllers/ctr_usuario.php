@@ -1,11 +1,14 @@
 <?php
+session_start();
 
 if(!isset($_SESSION["usuario"])){
-    include("ctr_Login.php");
-}
-$usuario = unserialize($_SESSION["usuario"]);
-$rol = $usuario->getRol();
+    header("Location: ctr_Login.php");
+}else{
+    $usuario = unserialize($_SESSION["usuario"]);
+    $rol = $usuario->getRol();
+    if ($rol_necesario != $rol){
+        header("Location: ctr_verTareas.php?denegado=1");
 
-if(!$rol){
-    header("ctr_verTareas.php");
+    }
 }
+

@@ -5,7 +5,7 @@ require_once DIR_PROYECTO."/models/Tarea.php";
 include_once DIR_PROYECTO . "/controllers/ctr_Tareas.php";
 include_once DIR_PROYECTO."/controllers/ctr_compDatos.php";
 
-if (isset($_POST["action"])) {
+if (IsPost("action")) {
     $errores = array();
     $enviar = array();
 

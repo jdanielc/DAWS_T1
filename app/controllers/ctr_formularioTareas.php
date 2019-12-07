@@ -4,10 +4,14 @@ require_once DIR_PROYECTO."/models/Tarea.php";
 require_once DIR_PROYECTO."/controllers/ctr_compDatos.php";
 include_once DIR_PROYECTO."/controllers/ctr_Tareas.php";
 
-if(isset($_POST["action"])){
-    $action = $_POST["action"];
+$rol_necesario = 1;
 
-        $id = ValorPost("id");
+include_once "ctr_usuario.php";
+
+if(IsGet("action")){
+    $action = ValorGET("action");
+
+        $id = ValorGET("id");
 
 
     $errores = array();
@@ -26,7 +30,8 @@ if(isset($_POST["action"])){
     ];
 
     if($action == "add"){
-        echo $blade ->run("CRUD.formulario", ["action" => $action, "provincias"=>$provincias, "errores"=> $errores, "id"=>$id, "datos"=>$datos, ]);
+        echo $blade ->run("CRUD.formulario", ["action" => $action, "errores"=> $errores,
+            "id"=>$id, "datos"=>$datos, ]);
     }else if($action == "mod"){
         $result = GetTarea($id);
         $t = $result->fetch();
