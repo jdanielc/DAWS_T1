@@ -11,7 +11,7 @@ if(isset($_POST["action"])){
     list($errores, $enviar) = comprobarDatosBasicos($errores, $enviar);
 
     if(sizeof($errores) > 0){
-        echo $blade->run("CRUD.formulario", ["errores"=>$errores, "action"=>"add", "provincias"=>$provincias, "datos"=>$datos, "id"=>$id]);
+        echo $blade->run("CRUD.formulario", ["errores"=>$errores, "action"=>"add", "datos"=>$datos, "id"=>$id]);
     }else{
         $result = NuevaTarea($enviar);
         if ($result){

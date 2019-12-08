@@ -1,0 +1,29 @@
+<html>
+<?php echo $this->runChild("\..\header.header", array('titulo'=>"Borrar Usuario")); ?>
+<body>
+ <form action="" method="post">
+ <div class="table-wrap">
+ <table class="table table-bordered">
+ <tr>
+ <th>Nombre</th>
+ <th>Apellido</th>
+ <th>Telefono</th>
+ <th>Email</th>
+ <th>Rol</th>
+ </tr>
+ <tr>
+ <td><p><?php echo static::e($empleado->getNombre()); ?></p></td>
+ <td><p><?php echo static::e($empleado->getApellido()); ?></p></td>
+ <td><p><?php echo static::e($empleado->getTlf()); ?></p></td>
+ <td><p><?php echo static::e($empleado->getEmail()); ?></p></td>
+ <td><p><?php echo static::e($empleado->getRol()); ?></p></td>
+ </tr>
+ </table>
+ <input type="hidden" name="borrar" value="<?php echo static::e($empleado->getId()); ?>">
+ <input type="submit" class="btn btn-danger" value="Borrar">
+ </div>
+ </form>
+ <a class="btn btn-primary" href="Front_Controller.php?a=ctr_verTareas.php" role="button">Volver</a>
+ </div>
+</body>
+</html>

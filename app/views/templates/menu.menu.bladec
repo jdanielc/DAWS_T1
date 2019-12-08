@@ -3,8 +3,6 @@
  <ul style="padding:0; position: relative; overflow: visible">
  <li><a href="Front_Controller.php?a=ctr_verUsuarios.php">Ver Usuarios</a></li>
  <li><a href="">Añadir Usuario</a></li>
- <li><a href="">Eliminar Usuario</a></li>
- <li><a href="">Modificar Usuario</a></li>
  </ul>
  </div>
 </div>

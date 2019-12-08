@@ -1,9 +1,8 @@
 <?php
-if (file_exists(APP_PATH."/config.php")){
+if (defined("APP_PATH")){
     require_once APP_PATH."/config.php";
 }else{
     require_once "../config.php";
-
 }
 include_once DIR_PROYECTO."/controllers/ctr_Empleado.php";
 include_once DIR_PROYECTO."/controllers/ctr_compDatos.php";
