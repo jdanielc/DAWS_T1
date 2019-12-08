@@ -6,8 +6,16 @@ $admin = false;
 if (isAdmin()){
     $admin = true;
 }
+$total_results = 0;
 
-$total_results = count($tareas);
+if (isset($tareas)){
+    $total_results = count($tareas);
+}
+if (isset($empleados)){
+    $total_results = count($empleados);
+
+}
+
 $limit = 4;
 $total_pages = intval(ceil($total_results/$limit));
 

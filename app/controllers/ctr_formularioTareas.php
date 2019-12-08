@@ -6,7 +6,7 @@ include_once DIR_PROYECTO."/controllers/ctr_Tareas.php";
 
 $rol_necesario = 1;
 
-include_once "ctr_usuario.php";
+include_once "ctr_acceso.php";
 
 if(IsGet("action")){
     $action = ValorGET("action");
@@ -51,7 +51,7 @@ if(IsGet("action")){
             "anotaciones_pos"=>$tarea->getAnotacionesPost()
         ];
 
-        echo $blade ->run("CRUD.formulario", ["action" => $action, "provincias"=>$provincias, "errores"=> $errores, "id"=>$id, "datos"=>$datos]);
+        echo $blade ->run("CRUD.formulario", ["action" => $action, "errores"=> $errores, "id"=>$id, "datos"=>$datos]);
     }
 
 }else{

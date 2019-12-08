@@ -115,8 +115,6 @@ function NuevaTarea($datos)
 (:operario, :admin, :fecha, :direccion,:poblacion, :provincia, :cp, :estado, :anotacion )");
         $result = $db->prepare($stmt);
 
-
-
         $result->bindParam(":operario", $datos["txtOperario"], PDO::PARAM_INT);
         $result->bindParam(":admin", $datos["txtAdmin"]);
         $result->bindParam(":fecha", $datos["fecha_creacion"]);

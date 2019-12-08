@@ -31,3 +31,14 @@ function getUsuario($id){
 
     }
 }
+
+function setProperRol($empleado){
+    $rol = $empleado->getRol();
+    if ($rol === "0"){
+        $empleado->setRol("Operario");
+    }else if ($rol === "1"){
+        $empleado->setRol("Administrador");
+    }
+
+    return $empleado;
+}

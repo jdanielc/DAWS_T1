@@ -5,7 +5,7 @@ include_once DIR_PROYECTO."/controllers/ctr_Tareas.php";
 
 //Compruebo que el usuario sea el indicado
 $rol_necesario = 1;
-include_once "ctr_usuario.php";
+include_once "ctr_acceso.php";
 
 if(isset($_POST["id"]) && !isset($_POST["delete"])){
     $id = $_POST["id"];

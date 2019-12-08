@@ -6,7 +6,7 @@ include_once DIR_PROYECTO."/controllers/ctr_Tareas.php";
 include_once DIR_PROYECTO."/controllers/ctr_compDatos.php";
 
 $rol_necesario = 0;
-include_once "ctr_usuario.php";
+include_once "ctr_acceso.php";
 
 if(IsGet("id") && !IsPost("estado")){
 
