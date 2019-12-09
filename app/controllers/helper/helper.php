@@ -4,8 +4,12 @@ function getCurrentUser()
     if (!isset($_SESSION)) {
         session_start();
     }
-    $usuario = unserialize($_SESSION["usuario"]);
-    $usuario = $usuario->getNombre() . " " . $usuario->getApellido();
+    if (isset($_SESSION["usuario"])){
+        $usuario = unserialize($_SESSION["usuario"]);
+        $usuario = $usuario->getNombre() . " " . $usuario->getApellido();
 
-    return $usuario;
+        return $usuario;
+    }else{
+        header("Location: ctr_Login.php");
+    }
 }

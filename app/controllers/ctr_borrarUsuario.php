@@ -12,6 +12,7 @@ if (IsPost("usuario") && !IsPost("borrar")){
     $result = getUsuario($id);
     $t = $result->fetch();
     $empleado = new Empleado($t["id"]);
+    setProperRol($empleado);
     echo $blade -> run("eliminar.eliminar_usuario", ["empleado" => $empleado]);
 
 }else if (IsPost("borrar")){

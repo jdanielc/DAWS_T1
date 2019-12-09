@@ -15,6 +15,7 @@ if(isset($_GET["denegado"])){
     echo "<script type='text/javascript'>alert('No tiene permiso para realizar esta acción');</script>";
 }
 
+
 $usuario = getCurrentUser();
 $result = GetTareas();
 

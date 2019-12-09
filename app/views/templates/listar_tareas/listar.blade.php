@@ -7,8 +7,8 @@
 </div>
 
 <div id="encabezado">
-    <div>
-        <p>{{$usuario}}</p>
+    <div class="row">
+        <a href="Front_Controller.php?a=ctr_LogOut.php"class="btn btn-info" title="Cerrar Sesion con usuario: {{$usuario}}">{{$usuario}}</a>
     </div>
     <form action="Front_Controller.php" method="get" id="form_add">
         <input type="hidden" name="a" value="ctr_formularioTareas.php">

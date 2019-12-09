@@ -61,7 +61,11 @@ if(IsPost("usuario")){
     if ($iscorrect){
         $_SESSION["usuario"] = serialize($usser);
         //include ("ctr_verTareas.php");
-        header("Location: app/controllers/ctr_verTareas.php");
+        if (file_exists("app/controllers/ctr_verTareas.php")){
+            header("Location: app/controllers/ctr_verTareas.php");
+        }else{
+            header("Location: ctr_verTareas.php");
+        }
     }else{
         echo $blade->run("login.login", ["errores"=>$errores, "datos"=>$datos]);
     }
