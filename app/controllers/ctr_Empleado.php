@@ -1,6 +1,9 @@
 <?php
 require_once DIR_PROYECTO."/models/Database.php";
-
+/**
+ * @return bool|PDOStatement
+ * @throws Exception
+ */
 function getUsuarios(){
     try{
         $db = Database::getInstance();
@@ -16,6 +19,11 @@ function getUsuarios(){
     }
 }
 
+/**
+ * @param $id
+ * @return bool|PDOStatement
+ * @throws Exception
+ */
 function getUsuario($id){
     try{
         $db = Database::getInstance();
@@ -32,6 +40,11 @@ function getUsuario($id){
     }
 }
 
+/**
+ * @param $id
+ * @return bool|PDOStatement
+ * @throws Exception
+ */
 function borrarUsuario($id){
     try{
         $db = Database::getInstance();
@@ -48,6 +61,10 @@ function borrarUsuario($id){
     }
 }
 
+/**
+ * @param $empleado
+ * @return mixed
+ */
 function setProperRol($empleado){
     $rol = $empleado->getRol();
     if ($rol === "0"){

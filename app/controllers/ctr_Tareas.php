@@ -41,7 +41,10 @@ function GetTarea($id)
 
 
 /**
- * Guarda la tarea
+ * @param $id
+ * @param $datos_tarea
+ * @return bool
+ * @throws Exception
  */
 function SaveTarea($id, $datos_tarea)
 {
@@ -105,7 +108,9 @@ function UpdateTarea($id, $datos){
 }
 
 /**
- * Guarda una nueva la tarea
+ * @param $datos
+ * @return bool
+ * @throws Exception
  */
 function NuevaTarea($datos)
 {
@@ -201,6 +206,10 @@ function dataExist($id){
 
 }
 
+/**
+ * @param $tarea
+ * @return mixed
+ */
 function setAdminAndOp($tarea){
     $operario = $tarea -> getOperario();
     $administrador = $tarea-> getAdministrativo();

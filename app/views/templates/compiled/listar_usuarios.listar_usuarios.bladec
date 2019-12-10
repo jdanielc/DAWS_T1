@@ -17,6 +17,7 @@
  <th>Telefono</th>
  <th>Email</th>
  <th>Rol</th>
+ <th>Acciones</th>
  </tr>
  <?php for($i= 0; $i < $limit; $i++): ?>
  <?php if(($i + $starting_limit) < $total_result): ?>

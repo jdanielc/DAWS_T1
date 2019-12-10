@@ -1,4 +1,7 @@
 <?php
+/**
+ * @return mixed|string
+ */
 function getCurrentUser()
 {
     if (!isset($_SESSION)) {

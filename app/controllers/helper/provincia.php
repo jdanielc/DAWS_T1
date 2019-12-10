@@ -12,10 +12,10 @@ $tabla = "";
 
 while ($row = $resultado->fetch_assoc()){
     if ($sel === $row["provincia"]){
-        $tabla .= "<option value='{$row["provincia"]}' selected='selected'>".utf8_encode($row["provincia"])."</option>";
+        $tabla .= "<option value='".utf8_encode($row["provincia"])."' selected='selected'>".utf8_encode($row["provincia"])."</option>";
 
     }else{
-        $tabla .= "<option value='{$row["provincia"]}'>".utf8_encode($row["provincia"])."</option>";
+        $tabla .= "<option value='".utf8_encode($row["provincia"])."'>".utf8_encode($row["provincia"])."</option>";
 
     }
 }

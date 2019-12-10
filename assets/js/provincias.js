@@ -6,6 +6,7 @@ $("#provincia").ready(function () {
         dataType: 'text',
         type: "POST",
         success: function (data) {
+            encode_utf8(data);
             $("#provincia").empty();
             $("#provincia").append(data);
             municipios();
@@ -27,7 +28,7 @@ function municipios() {
     var selected = $("#provincia").children("option:selected").val();
     $.ajax({
         url: 'helper/municipios.php',
-        data: {"municipio": selected},
+        data: {"municipio": encode_utf8(selected)},
         dataType: "text",
         type: "POST",
         success: function (data) {
@@ -40,3 +41,13 @@ function municipios() {
     });
 }
 
+function encode_utf8(s) {
+
+    return unescape(encodeURIComponent(s));
+
+}
+
+function decode_utf8( s )
+{
+    return decodeURIComponent( escape( s ) );
+}

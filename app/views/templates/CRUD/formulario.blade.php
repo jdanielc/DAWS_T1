@@ -13,7 +13,7 @@ $_SESSION["provincia"] = $datos["provincia"];
 $_SESSION["municipios"] = $datos["txtPoblacion"];
 
 ?>
-<html>
+<html lang="es">
 @if($action == "add")
     @include("\..\header.header", array('titulo'=>"Añadir Tarea"))
 

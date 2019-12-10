@@ -1,4 +1,9 @@
 <?php
+/**
+ * @param array $errores
+ * @param array $enviar
+ * @return array
+ */
 function comprobarDatosBasicos(array $errores, array $enviar)
 {
     if (!is_numeric(ValorPost("txtOperario")) || !dataExist(ValorPost("txtOperario"))) {
@@ -101,6 +106,10 @@ function isValidDate($d1, $inicio)
     }
 }
 
+/**
+ * @param $nombre_campo
+ * @return bool
+ */
 function IsPost($nombre_campo){
     if (!isset($_POST[$nombre_campo]) || $_POST[$nombre_campo] === "" || $_POST[$nombre_campo] == null){
         return false;
@@ -109,6 +118,11 @@ function IsPost($nombre_campo){
     }
 }
 
+/**
+ * @param $nombreCampo
+ * @param string $valorPorDefecto
+ * @return mixed|string
+ */
 function ValorPost($nombreCampo, $valorPorDefecto='')
 {
     if (isset($_POST[$nombreCampo]))
@@ -117,6 +131,10 @@ function ValorPost($nombreCampo, $valorPorDefecto='')
         return $valorPorDefecto;
 }
 
+/**
+ * @param $nombre_campo
+ * @return bool
+ */
 function IsGet($nombre_campo){
     if (!isset($_GET[$nombre_campo]) || $_GET[$nombre_campo] === "" || $_GET[$nombre_campo] == null){
         return false;
@@ -125,6 +143,11 @@ function IsGet($nombre_campo){
     }
 }
 
+/**
+ * @param $nombreCampo
+ * @param string $valorPorDefecto
+ * @return mixed|string
+ */
 function ValorGET($nombreCampo, $valorPorDefecto='')
 {
     if (isset($_GET[$nombreCampo]))
@@ -133,6 +156,9 @@ function ValorGET($nombreCampo, $valorPorDefecto='')
         return $valorPorDefecto;
 }
 
+/**
+ * @return bool
+ */
 function isAdmin(){
     if (isset($_SESSION["usuario"])){
         $usuario = unserialize($_SESSION["usuario"]);
