@@ -12,13 +12,11 @@ function VerErroresLogin($campo)
 @include("\..\header.header", array('titulo'=>"Log In"))
 
 <body>
-<div class="text-center">
-</div>
 <div>
     <div class="container text-center">
-        <p><h2>Login de usuario:</h2></p>
+        <p><h2>Login de usuario</h2></p>
     </div>
-    <div class="container">
+    <div class="container text-center">
         <form  action="" method="POST">
             <label for="name">Usuario:
                 <input type="text" name="usuario" class="" value="@if(isset($datos["usuario"])){{$datos["usuario"]}}@endif"/>

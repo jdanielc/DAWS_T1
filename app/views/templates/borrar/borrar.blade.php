@@ -1,7 +1,10 @@
 <html>
 @include("\..\header.header", array('titulo'=>"Eliminar Tarea"))
 <body>
-<h2>Tareas A Eliminar</h2>
+<div class="titulo">
+    <h2>Tareas A Eliminar</h2>
+</div>
+
 <table class="table table-bordered">
     <tr>
         <th>Operario</th>
@@ -30,24 +33,18 @@
         <td><p>{{$tarea->getAnotacionesPost()}}</p></td>
     </tr>
 </table>
-<table id="t_buttons">
-    <tr>
-        <td>
-            <form action="" method="post">
-                <input type="hidden" name="delete[]" value="delete"/>
-                <input type="hidden" name="id" value="{{$id}}"/>
-                <button><h2>Eliminar</h2></button>
-            </form>
-        </td>
-        <td>
-            <form action="" method="post">
-                <input type="hidden" name="delete[]" value="cancel"/>
-                <input type="hidden" name="id" value="{{$id}}"/>
-                <button ><h2>Cancelar</h2></button>
-            </form>
-        </td>
-    </tr>
-</table>
 
+<footer class="row">
+    <form action="" method="post" class="col-sm-1">
+        <input type="hidden" name="delete[]" value="delete"/>
+        <input type="hidden" name="id" value="{{$id}}"/>
+        <button class="btn btn-danger">Eliminar</button>
+    </form>
+    <form action="" method="post">
+        <input type="hidden" name="delete[]" value="cancel"/>
+        <input type="hidden" name="id" value="{{$id}}"/>
+        <button class="btn btn-primary">Cancelar</button>
+    </form>
+</footer>
 </body>
 </html>

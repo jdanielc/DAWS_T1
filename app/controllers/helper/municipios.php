@@ -24,19 +24,16 @@ $stmt = $dbh->prepare("SELECT municipio FROM municipios INNER JOIN provincias ON
 $stmt->bindParam(":provincia", $provincia, PDO::PARAM_STR);
 $stmt->setFetchMode(PDO::FETCH_ASSOC);
 
-
 $stmt->execute();
 
 $tabla = "";
 while ($row = $stmt->fetch()){
     if($municipio === $row["municipio"]){
-        $tabla .= "<option value='".utf8_encode($row["municipio"])."' selected='selected'>".utf8_encode($row["municipio"])."</option>";
+        $tabla .= "<option value='".($row["municipio"])."' selected='selected'>".($row["municipio"])."</option>";
     }else{
-        $tabla .= "<option value='".utf8_encode($row["municipio"])."'>".utf8_encode($row["municipio"])."</option>";
+        $tabla .= "<option value='".($row["municipio"])."'>".($row["municipio"])."</option>";
 
     }
 }
-
-
 
 echo $tabla;
