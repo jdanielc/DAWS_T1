@@ -1,0 +1,133 @@
+html{
+    overflow-x: hidden;
+    margin:0;
+    padding:0;
+}
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+table{
+    border-radius: 1em;
+    overflow: hidden;
+    table-layout: fixed;
+position: relative;
+}
+
+.table-wrap{
+    padding-left: 0 !important;;
+}
+h1{
+    alignment: center;
+    text-align: center;
+}
+td, th{
+    text-align: center;
+}
+
+th{
+    color: white;
+    background: black;
+}
+.links{
+    alignment: center;
+    text-align: center;
+}
+li {
+    list-style: none;
+}
+.icono {
+    width: 30px;
+    alignment: center;
+}
+
+
+.linkb {
+    border: 0;
+    padding: 0;
+    display: inline;
+    background: none;
+    text-decoration: underline;
+    color: blue;
+}
+.linkb:hover {
+    cursor: pointer;
+}
+.lista_botones{
+    padding: 0;
+}
+
+.buttonB {
+    font: bold 11px Arial;
+    text-decoration: none;
+    background-color: #EEEEEE;
+    color: #333333;
+    padding: 2px 6px 2px 6px;
+    border-top: 1px solid #CCCCCC;
+    border-right: 1px solid #333333;
+    border-bottom: 1px solid #333333;
+    border-left: 1px solid #CCCCCC;
+}
+
+#t_buttons{
+    border: none;
+}
+#t_complete{
+    alignment: center;
+    margin-top: 20px;
+}
+
+#formulario td{
+    padding: 15px;
+}
+#bt_aceptar{
+    alignment: center;
+}
+.error{
+    color: red;
+}
+
+.titulo {
+    background: #ccffff;
+    text-align: center;
+    font-size: 2em;
+    margin-bottom: 10px;
+    padding: 15px;
+}
+
+#encabezado{
+    background: powderblue;
+    padding: 20px;
+margin-bottom: 5px;
+}
+
+#form_add, #form_back{
+    float: left;
+    text-align: left;
+}
+#form_seach{
+    text-align: right;
+}
+
+.row.content {height: 450px}
+
+/* Set gray background color and 100% height */
+.sidenav {
+    padding-top: 20px;
+    background-color: #f1f1f1;
+    height: 100%;
+}
+.sidemenu{
+    padding-right: 0px !important;
+    border-radius: 1em;
+    overflow: hidden;
+}
+/* Set black background color, white text and some padding */
+footer {
+    background-color: #555;
+    color: white;
+    padding: 15px;
+}
+
+.row{
+    margin-bottom: 5px;
+}

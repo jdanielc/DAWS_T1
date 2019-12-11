@@ -1,0 +1,157 @@
+<?php
+function VerErrores($campo)
+{
+ global $errores;
+ if (isset($errores[$campo]))
+ {
+ echo "<p style='color: red'>".$errores[$campo]."</p>";
+ }
+
+}
+
+$_SESSION["provincia"] = $datos["provincia"];
+$_SESSION["municipios"] = $datos["txtPoblacion"];
+
+?>
+<html lang="es">
+<?php if($action == "add"): ?>
+ <?php echo $this->runChild("\..\header.header", array('titulo'=>"Añadir Tarea")); ?>
+
+<?php elseif($action == "mod"): ?>
+ <?php echo $this->runChild("\..\header.header", array('titulo'=>"Modificar Tarea")); ?>
+
+<?php endif; ?>
+<body>
+<div class="titulo">
+ <h2 class="title">
+ <?php if($action === "mod"): ?>
+ Modificar Tarea
+ <?php elseif($action === "add"): ?>
+ Añadir Tarea
+ <?php else: ?>
+ Formulario
+ <?php endif; ?>
+</h2>
+ <p></p>
+</div>
+
+<form     <?php if($action == "mod"): ?>
+ action="ctr_modTarea.php"
+ <?php elseif($action == "add"): ?>
+ action="ctr_addTareas.php"
+ <?php endif; ?>
+ method="post">
+
+<table id="formulario" class="table table-bordered">
+ <tr>
+ <td>
+ <label for="txtOperario">Operario</label>
+ <input type="text" id="txtOperario" name="txtOperario" value="<?php echo static::e($datos["txtOperario"]); ?>">
+ <?=VerErrores("txtOperario")?>
+ </td>
+ <td>
+ <label for="txtAdmin">Administrador</label>
+ <input type="text" id="txtAdmin" name="txtAdmin" value="<?php echo static::e($datos["txtAdmin"]); ?>">
+ <?=VerErrores("txtAdmin")?>
+
+ </td>
+ </tr>
+ <tr>
+ <?php if($action == "mod"): ?>
+ <td>
+ <label for="fecha_creacion">Fecha de Creación</label>
+ <input type="text" id="fecha_creacion" name="fecha_creacion" placeholder="dd-mm-yyyy"  value="<?php echo static::e($datos["fecha_creacion"]); ?>"
+ <?php if($action == "mod"): ?>
+ disabled
+ >
+ <input type="hidden" name="fecha_creacion" value="<?php echo static::e($datos["fecha_creacion"]); ?>"
+ <?php endif; ?>
+ >
+ <?=VerErrores("fecha_creacion")?>
+ </td>
+ <td>
+ <label for="fecha_realizacion">Fecha Realizacion</label>
+ <input type="text" id="fecha_realizacion" name="fecha_realizacion" placeholder="dd-mm-yyyy"  value="<?php echo static::e($datos["fecha_realizacion"]); ?>">
+ <?=VerErrores("fecha_realizacion")?>
+
+ </td>
+ <?php endif; ?>
+ </tr>
+ <tr>
+ <td>
+ <label for="txtDireccion">Dirección</label>
+ <input type="text" id="txtDireccion" name="txtDireccion"  value="<?php echo static::e($datos["txtDireccion"]); ?>">
+ <?=VerErrores("txtDireccion")?>
+
+ </td>
+ <td>
+ <label for="txtPoblacion">Población</label>
+ <!--<input type="text" id="txtPoblacion" name="txtPoblacion" value="<?php echo static::e($datos["txtPoblacion"]); ?>">-->
+
+ <select name="txtPoblacion" id="txtPoblacion" value="<?php echo static::e($datos["txtPoblacion"]); ?>">
+ <option></option>
+ </select>
+
+ <?=VerErrores("txtPoblacion")?>
+ </td>
+ </tr>
+ <tr>
+ <td>
+ <label for="provincia">Provincia</label>
+ <select name="provincia" id="provincia" value="<?php echo static::e($datos["provincia"]); ?>">
+
+ </select></td>
+ <td>
+ <label for="txtCP">Código Postal</label>
+ <input type="text" id="txtCP" name="txtCP"  value="<?php echo static::e($datos["txtCP"]); ?>">
+ <?=VerErrores("txtCP")?>
+
+ </td>
+ </tr>
+ <?php if($action == "mod"): ?>
+ <tr>
+ <td colspan="2"><label for="estado">Estado: </label>
+ <input type="radio" name="estado" value="R" <?php if($datos["estado"] ==="R"): ?> checked="checked" <?php endif; ?>>Realizada
+ <input type="radio" name="estado" value="P" <?php if($datos["estado"] ==="P"): ?> checked="checked" <?php endif; ?>>Pendiente
+ <input type="radio" name="estado" value="C" <?php if($datos["estado"] ==="C"): ?> checked="checked" <?php endif; ?>>Cancelada
+ </td>
+ </tr>
+ <?php else: ?>
+ <input type="hidden" name="estado" value="P">
+ <?php endif; ?>
+ <tr>
+ <td>
+ <label for="anotaciones_ant">Anotaciones Anteriores</label>
+ </td>
+
+ <?php if($action == "mod"): ?>
+ <td>
+ <label for="anotaciones_pos">Anotaciones Posteriores</label>
+ </td>
+ <?php endif; ?>
+
+ </tr>
+ <tr>
+ <td>
+ <textarea name="anotaciones_ant" id="anotaciones_ant" cols="50" rows="10"><?php echo static::e($datos["anotaciones_ant"]); ?></textarea>
+ </td>
+ <?php if($action == "mod"): ?>
+
+ <td>
+ <textarea name="anotaciones_pos" id="anotaciones_pos" cols="50" rows="10"><?php echo static::e($datos["anotaciones_pos"]); ?></textarea>
+ </td>
+ <?php endif; ?>
+ </tr>
+</table>
+ <input type="hidden" name="id" id="id" value="<?php echo static::e($id); ?>">
+ <input type="hidden" name="action" value="<?php echo static::e($action); ?>">
+ <input type="submit" value="Aceptar" class="btn btn-primary" id="bt_aceptar">
+</form>
+<form action="Front_Controller.php" method="get">
+ <input type="hidden" value="ctr_verTareas.php" name="a">
+ <button type="submit" class="btn btn-link">
+ <i class='fas fa-arrow-left'></i>Volver
+ </button>
+</form>
+</body>
+</html>

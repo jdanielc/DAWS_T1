@@ -1,0 +1,8 @@
+<div class="text-center col-sm-2 sidemenu">
+ <div class="sidenav">
+ <ul style="padding:0; position: relative; overflow: visible">
+ <li><a href="Front_Controller.php?a=ctr_verUsuarios.php">Ver Usuarios</a></li>
+ <li><a href="">Añadir Usuario</a></li>
+ </ul>
+ </div>
+</div>

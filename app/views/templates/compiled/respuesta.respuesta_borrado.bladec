@@ -1,0 +1,7 @@
+<html>
+<?php echo $this->runChild("\..\header.header", array('titulo'=>"Se ha borrado")); ?>
+<body>
+<h1>BORRADO</h1>
+<a href="" class="buttonB"></a>
+</body>
+</html>
